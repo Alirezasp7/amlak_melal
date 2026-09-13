@@ -24,6 +24,6 @@ class CustomLoginView(LoginView):
 
 
 
-def logout(request):
+def logout_view(request):
     logout(request)
     return redirect("/")

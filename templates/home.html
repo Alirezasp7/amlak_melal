@@ -4,8 +4,12 @@
     <title>Real Estate</title>
 </head>
 <body>
-    <h1>Welcome to our Real Estate Website</h1>
-
-    <a href="{% url 'signup' %}">Sign Up</a>
+    {% if user.is_authenticated %}
+        <span>Welcome, {{ user.first_name }}!</span>
+        <a href="{% url 'logout' %}">Log out</a>
+    {% else %}
+        <a href="{% url 'signup' %}">Sign up</a>
+        <a href="{% url 'login' %}">Log in</a>
+    {% endif %}
 </body>
 </html>
