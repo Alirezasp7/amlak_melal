@@ -23,6 +23,6 @@ urlpatterns = [
     path('control_panel/', include("control_panel.urls")),
     path('favorites/', include("favorites.urls")),
     path('properties/', include("properties.urls")),
-    path('requests/', include("requests.urls")),
+    path('requests/', include("filing_requests.urls")),
     path('', include("core.urls"))
 ]

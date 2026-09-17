@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'accounts',
     'favorites',
     'properties',
-    'requests',
+    'filing_requests',
     'core'
 ]
 
