@@ -1,6 +1,6 @@
 from django import forms
 from .request_options import USER_TYPE_CHOICES, PROPERTY_TYPE_CHOICES, EXCLUDED_PROPERTY_TYPES
-from .models import BuyApartmentRequest
+from .models import BuyApartmentRequest, SellApartmentRequest
 
 class RequestSelectionForm(forms.Form):
     """
@@ -58,6 +58,7 @@ class BuyApartmentRequestForm(forms.ModelForm):
 
         return cleaned_data
 
+
     def _validate_range(self, cleaned_data, min_field, max_field, label):
         min_value = cleaned_data.get(min_field)
         max_value = cleaned_data.get(max_field) 
@@ -67,3 +68,24 @@ class BuyApartmentRequestForm(forms.ModelForm):
                 max_field,
                 f"{label}: مقدار حداکثر باید بزرگ‌تر یا مساوی حداقل باشد."
             )
+
+
+    
+class SellApartmentRequestForm(forms.ModelForm):
+    class Meta:
+        model = SellApartmentRequest
+        fields = [
+            "picture_1",
+            "picture_2",
+            "picture_3",
+            "picture_4",
+            "picture_5",
+            "district",
+            "address",
+            "exact_area",
+            "bedrooms",
+            "units_per_floor",
+            "floor",
+            "exact_price",
+            "has_elevator", "has_storage", "has_balcony", "has_parking"
+        ]
