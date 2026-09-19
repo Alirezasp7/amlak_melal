@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import redirect, render
 
-from .forms import RequestSelectionForm, BuyApartmentRequestForm, SellApartmentRequestForm
+from .forms import RequestSelectionForm, BuyApartmentRequestForm, SellApartmentRequestForm, RentApartmentRequestForm
 from .request_options import USER_TYPE_CHOICES, PROPERTY_TYPE_CHOICES, EXCLUDED_PROPERTY_TYPES, BUYER, SELLER, TENANT, LANDLORD, APARTMENT, COMMERCIAL, OFFICE, KOLANGI
 
 
@@ -27,6 +27,8 @@ def select_request_type(request):
                 return redirect("filing_requests:buy_apartment")
             elif user_type == "seller" and property_type == "apartment":
                 return redirect("filing_requests:sell_apartment")
+            elif user_type == "tenant" and property_type == "apartment":
+                return redirect("filing_requests:rent_apartment")
             else:
                 form = RequestSelectionForm()
     else:
@@ -62,10 +64,6 @@ def buy_apartment_request(request):
     return render(request, "filing_requests/buy_apartment.html", {"form": form})
 
 
-def request_success(request):
-    return render(request, "filing_requests/request_success.html")
-
-
 @login_required
 def sell_apartment_request(request):
     if request.method == "POST":
@@ -83,3 +81,26 @@ def sell_apartment_request(request):
         form = SellApartmentRequestForm()
 
     return render(request, "filing_requests/sell_apartment.html", {"form":form})
+
+
+@login_required
+def rent_apartment_request(request):
+    if request.method == "POST":
+        form = RentApartmentRequestForm(request.POST)
+
+        if form.is_valid():
+            apartment_request = form.save(commit=False)
+            apartment_request.user = request.user
+            apartment_request.user_type = SELLER
+            apartment_request.property_type = APARTMENT
+            apartment_request.save()
+
+            return redirect("filing_requests:request_success")
+    else:
+        form = RentApartmentRequestForm()
+
+    return render(request, "filing_requests/rent_apartment.html", {"form":form})
+
+
+def request_success(request):
+    return render(request, "filing_requests/request_success.html")

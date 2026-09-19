@@ -1,6 +1,6 @@
 from django import forms
 from .request_options import USER_TYPE_CHOICES, PROPERTY_TYPE_CHOICES, EXCLUDED_PROPERTY_TYPES
-from .models import BuyApartmentRequest, SellApartmentRequest
+from .models import BuyApartmentRequest, SellApartmentRequest, RentApartmentRequest
 
 class RequestSelectionForm(forms.Form):
     """
@@ -89,3 +89,38 @@ class SellApartmentRequestForm(forms.ModelForm):
             "exact_price",
             "has_elevator", "has_storage", "has_balcony", "has_parking"
         ]
+
+
+class RentApartmentRequestForm(forms.ModelForm):
+    class Meta:
+        model = RentApartmentRequest
+        fields = [
+            "district",
+            "min_area",
+            "max_area",
+            "bedrooms",
+            "floor",
+            "deposit",
+            "monthly_rent",
+            "is_convertible",
+            "has_elevator", "has_parking", "has_storage", "has_balcony"
+        ]
+
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        self._validate_range(cleaned_data, "min_area", "max_area", "متراژ")
+
+        return cleaned_data
+
+
+    def _validate_range(self, cleaned_data, min_field, max_field, label):
+        min_value = cleaned_data.get(min_field)
+        max_value = cleaned_data.get(max_field) 
+
+        if min_value is not None and max_value is not None and min_value > max_value:
+            self.add_error(
+                max_field,
+                f"{label}: مقدار حداکثر باید بزرگ‌تر یا مساوی حداقل باشد."
+            )

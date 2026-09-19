@@ -1,0 +1,51 @@
+{% extends "filing_requests/base.html" %}
+
+{% block title %}ثبت درخواست اجاره آپارتمان{% endblock %}
+{% block page_title %}ثبت درخواست اجاره آپارتمان{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+
+    <h2>مشخصات ملک</h2>
+    {% include "filing_requests/_field.html" with field=form.district %}
+
+    <h2>متراژ (متر مربع)</h2>
+    <div>
+        {% include "filing_requests/_field.html" with field=form.min_area %}
+        {% include "filing_requests/_field.html" with field=form.max_area %}
+    </div>
+
+    <h2>ویژگی‌های آپارتمان</h2>
+    {% include "filing_requests/_field.html" with field=form.bedrooms %}
+    {% include "filing_requests/_field.html" with field=form.floor %}
+
+    <h2>شرایط مالی</h2>
+    {% include "filing_requests/_field.html" with field=form.deposit %}
+    {% include "filing_requests/_field.html" with field=form.monthly_rent %}
+    <div>
+        <label>{{ form.is_convertible }} {{ form.is_convertible.label }}</label>
+        {% if form.is_convertible.errors %}
+            <ul class="errors">
+                {% for error in form.is_convertible.errors %}<li>{{ error }}</li>{% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <h2>امکانات</h2>
+    <div>
+        <label>{{ form.has_elevator }} {{ form.has_elevator.label }}</label>
+        <label>{{ form.has_parking }} {{ form.has_parking.label }}</label>
+        <label>{{ form.has_storage }} {{ form.has_storage.label }}</label>
+        <label>{{ form.has_balcony }} {{ form.has_balcony.label }}</label>
+    </div>
+
+    {% if form.non_field_errors %}
+        <ul>
+            {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+        </ul>
+    {% endif %}
+
+    <button type="submit">ثبت درخواست</button>
+</form>
+{% endblock %}

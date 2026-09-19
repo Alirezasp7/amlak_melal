@@ -141,5 +141,19 @@ class SellApartmentRequest(BaseRequest):
     has_balcony = models.BooleanField(default=False)
 
 
+class RentApartmentRequest(BaseRequest):
+    bedrooms = models.PositiveSmallIntegerField(choices=BEDROOM_CHOICES)
+    floor = models.SmallIntegerField(choices=FLOOR_CHOICES)
+
+    deposit = models.BigIntegerField()
+    monthly_rent = models.BigIntegerField()
+    is_convertible = models.BooleanField(default=False)
+
+    has_elevator = models.BooleanField(default=False)
+    has_parking = models.BooleanField(default=False)
+    has_storage = models.BooleanField(default=False)
+    has_balcony = models.BooleanField(default=False)
+
+
 
     
