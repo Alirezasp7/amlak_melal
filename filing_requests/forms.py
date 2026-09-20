@@ -44,7 +44,6 @@ class BuyApartmentRequestForm(forms.ModelForm):
             "min_price", "max_price",
             "min_area", "max_area",
             "bedrooms",
-            "floor",
             "year_built",
             "has_elevator", "has_storage", "has_balcony", "has_parking"
             ]
@@ -53,22 +52,10 @@ class BuyApartmentRequestForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super().clean()
 
-        self._validate_range(cleaned_data, "min_price", "max_price", "قیمت")
-        self._validate_range(cleaned_data, "min_area", "max_area", "متراژ")
+        _validate_range(self, cleaned_data, "min_price", "max_price", "قیمت")
+        _validate_range(self, cleaned_data, "min_area", "max_area", "متراژ")
 
         return cleaned_data
-
-
-    def _validate_range(self, cleaned_data, min_field, max_field, label):
-        min_value = cleaned_data.get(min_field)
-        max_value = cleaned_data.get(max_field) 
-
-        if min_value is not None and max_value is not None and min_value > max_value:
-            self.add_error(
-                max_field,
-                f"{label}: مقدار حداکثر باید بزرگ‌تر یا مساوی حداقل باشد."
-            )
-
 
     
 class SellApartmentRequestForm(forms.ModelForm):
@@ -87,8 +74,12 @@ class SellApartmentRequestForm(forms.ModelForm):
             "year_built",
             "units_per_floor",
             "floor",
+            "total_floors",
             "exact_price",
-            "has_elevator", "has_storage", "has_balcony", "has_parking"
+            "occupancy_status",
+            "deed_status",
+            "has_elevator", "has_storage", "has_balcony", "has_parking",
+            "description"
         ]
 
 
@@ -100,11 +91,11 @@ class RentApartmentRequestForm(forms.ModelForm):
             "min_area",
             "max_area",
             "bedrooms",
-            "floor",
             "year_built",
-            "deposit",
-            "monthly_rent",
-            "is_convertible",
+            "min_deposit",
+            "max_deposit",
+            "min_monthly_rent",
+            "max_monthly_rent",
             "has_elevator", "has_parking", "has_storage", "has_balcony"
         ]
 
@@ -112,20 +103,9 @@ class RentApartmentRequestForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super().clean()
 
-        self._validate_range(cleaned_data, "min_area", "max_area", "متراژ")
+        _validate_range(self, cleaned_data, "min_area", "max_area", "متراژ")
 
         return cleaned_data
-
-
-    def _validate_range(self, cleaned_data, min_field, max_field, label):
-        min_value = cleaned_data.get(min_field)
-        max_value = cleaned_data.get(max_field) 
-
-        if min_value is not None and max_value is not None and min_value > max_value:
-            self.add_error(
-                max_field,
-                f"{label}: مقدار حداکثر باید بزرگ‌تر یا مساوی حداقل باشد."
-            )
 
 
 class LeaseApartmentRequestForm(forms.ModelForm):
@@ -143,8 +123,49 @@ class LeaseApartmentRequestForm(forms.ModelForm):
             "bedrooms",
             "floor",
             "year_built",
-            "deposit",
-            "monthly_rent",
+            "exact_deposit", "exact_monthly_rent",
+            "min_deposit", "max_deposit", "min_monthly_rent", "max_monthly_rent",
             "is_convertible",
             "has_elevator", "has_parking", "has_storage", "has_balcony"
         ]
+
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        convertible = cleaned_data.get("is_convirtible")
+
+        range_fields = ["min_deposit", "max_deposit", "min_monthly_rent", "max_monthly_rent"]
+        exact_fields = ["exact_deposit", "exact_monthly_rent"]
+
+        if convertible:
+            for field in range_fields:
+                if cleaned_data.get(field) is None:
+                    self.add_error(field, "این فیلد در حالت قابل تبدیل الزامی است")
+        
+            for field in exact_fields:
+                if cleaned_data.get(field) is not None:
+                    self.add_error(field, "در حالت قابل تبدیل نباید مقدار دقیق وارد شود")
+            
+            _validate_range(self, cleaned_data, "min_deposit", "max_deposit", "رهن")
+            _validate_range(self, cleaned_data, "min_monthly_rent", "max_monthly_range", "اجاره ماهانه")
+        else:
+            for field in range_fields:
+                if cleaned_data.get(field):
+                    self.add_error(field, "در حالت غیر قابل تبدیل نباید بازه وارد شود")
+            
+            for field in exact_fields:
+                if cleaned_data.get(field):
+                    self.add_error(field, "این فیلد الزامی است")
+        
+        return cleaned_data
+
+
+def _validate_range(form, cleaned_data, min_field, max_field, label):
+        min_value = cleaned_data.get(min_field)
+        max_value = cleaned_data.get(max_field) 
+
+        if min_value is not None and max_value is not None and min_value > max_value:
+            form.add_error(
+                max_field,
+                f"{label}: مقدار حداکثر باید بزرگ‌تر یا مساوی حداقل باشد."
+            )

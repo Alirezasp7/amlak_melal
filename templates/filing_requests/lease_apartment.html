@@ -18,19 +18,24 @@
     {% include "filing_requests/_field.html" with field=form.year_built %}
 
     <h2>شرایط مالی</h2>
-    {% include "filing_requests/_field.html" with field=form.deposit %}
-    {% include "filing_requests/_field.html" with field=form.monthly_rent %}
 
     <div class="form-group">
         <label>
             {{ form.is_convertible }}
             {{ form.is_convertible.label }}
         </label>
-        {% if form.is_convertible.errors %}
-            <ul class="errors">
-                {% for error in form.is_convertible.errors %}<li>{{ error }}</li>{% endfor %}
-            </ul>
-        {% endif %}
+    </div>
+
+    <div id="exact-financials">
+        {% include "filing_requests/_field.html" with field=form.exact_deposit %}
+        {% include "filing_requests/_field.html" with field=form.exact_monthly_rent %}
+    </div>
+
+    <div id="range-financials" style="display: none;">
+        {% include "filing_requests/_field.html" with field=form.min_deposit %}
+        {% include "filing_requests/_field.html" with field=form.max_deposit %}
+        {% include "filing_requests/_field.html" with field=form.min_monthly_rent %}
+        {% include "filing_requests/_field.html" with field=form.max_monthly_rent %}
     </div>
 
     <h2>تصاویر</h2>
@@ -59,4 +64,26 @@
 
     <button type="submit">ثبت درخواست</button>
 </form>
+
+<script>
+    (function () {
+        const checkbox = document.getElementById("{{ form.is_convertible.id_for_label }}");
+        const exactBlock = document.getElementById("exact-financials");
+        const rangeBlock = document.getElementById("range-financials");
+
+        function toggle() {
+            if (checkbox.checked) {
+                exactBlock.style.display = "none";
+                rangeBlock.style.display = "block";
+            } else {
+                exactBlock.style.display = "block";
+                rangeBlock.style.display = "none";
+            }
+        }
+
+        checkbox.addEventListener("change", toggle);
+        toggle(); // run once on load, in case the form re-renders after a failed submit
+    })();
+</script>
+
 {% endblock %}

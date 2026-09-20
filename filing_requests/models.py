@@ -30,19 +30,58 @@ FLOOR_CHOICES = [
     (13, "۱۳"),
     (14, "۱۴"),
     (15, "۱۵"),
+]
+
+TOTAL_FLOORS_CHOICES = [
+    (1, "۱"),
+    (2, "۲"),
+    (3, "۳"),
+    (4, "۴"),
+    (5, "۵"),
+    (6, "۶"),
+    (7, "۷"),
+    (8, "۸"),
+    (9, "۹"),
+    (10, "۱۰"),
+    (11, "۱۱"),
+    (12, "۱۲"),
+    (13, "۱۳"),
+    (14, "۱۴"),
+    (15, "۱۵"),
+]
+
+YEAR_BUILT_CHOICES = [
+    (0, "نوساز"),
+    (1, "۱"),
+    (2, "۲"),
+    (3, "۳"),
+    (4, "۴"),
+    (5, "۵"),
+    (6, "۶"),
+    (7, "۷"),
+    (8, "۸"),
+    (9, "۹"),
+    (10, "۱۰"),
+    (11, "۱۱"),
+    (12, "۱۲"),
+    (13, "۱۳"),
+    (14, "۱۴"),
+    (15, "۱۵"),
     (16, "۱۶"),
     (17, "۱۷"),
     (18, "۱۸"),
     (19, "۱۹"),
-    (20, "۲۰+"),
-]    
-
-YEAR_BUILT_CHOICES = [
-    ("0-5", "۰ تا ۵ سال"),
-    ("5-10", "۵ تا ۱۰ سال"),
-    ("10-15", "۱۰ تا ۱۵ سال"),
-    ("15-20", "۱۵ تا ۲۰ سال"),
-    ("20+", "بیش از ۲۰ سال"),
+    (20, "۲۰"),
+    (21, "۲۱"),
+    (22, "۲۲"),
+    (23, "۲۳"),
+    (24, "۲۴"),
+    (25, "۲۵"),
+    (26, "۲۶"),
+    (27, "۲۷"),
+    (28, "۲۸"),
+    (29, "۲۹"),
+    (30, "۳۰+"),
 ]
 
 UNITS_PER_FLOOR_CHOICES = [
@@ -56,6 +95,21 @@ UNITS_PER_FLOOR_CHOICES = [
     (8, "۸"),
     (9, "۹"),
     (10, "۱۰")
+]
+
+OCCUPANCY_STATUS_CHOICES = [
+    (1, "سکونت مالک"),
+    (2, "سکونت مستاجر"),
+    (3, "تخلیه")
+]
+
+DEED_STATUS_CHOICES = [
+    (1, "تک برگ"),
+    (2, "دفترچه ای"),
+    (3, "قولنامه ای"),
+    (4, "اوقاف"),
+    (5, "تعاونی"),
+    (6, "در دست اقدام")
 ]
 
 
@@ -114,9 +168,8 @@ class BaseRequest(models.Model):
 
 
 class BuyApartmentRequest(BaseRequest):
-    bedrooms = models.PositiveSmallIntegerField(choices=BEDROOM_CHOICES)
-    floor = models.SmallIntegerField(choices=FLOOR_CHOICES, blank=True)
-    year_built = models.CharField(max_length=40, choices=YEAR_BUILT_CHOICES, blank=True)
+    bedrooms = models.PositiveSmallIntegerField(choices=BEDROOM_CHOICES, default=1)
+    year_built = models.SmallIntegerField(choices=YEAR_BUILT_CHOICES, blank=True, default=1)
 
     has_elevator = models.BooleanField(default=False)
     has_parking = models.BooleanField(default=False)
@@ -131,25 +184,31 @@ class SellApartmentRequest(BaseRequest):
     picture_4 = models.ImageField(upload_to="media/apartment/sell_apartment/", blank=True)
     picture_5 = models.ImageField(upload_to="amedia/apartment/sell_apartment/", blank=True)
     address = models.CharField(max_length=150)
-    bedrooms = models.PositiveSmallIntegerField(choices=BEDROOM_CHOICES)
-    units_per_floor = models.PositiveSmallIntegerField(choices=UNITS_PER_FLOOR_CHOICES, blank=True)
-    floor = models.SmallIntegerField(choices=FLOOR_CHOICES, blank=True)
-    year_built = models.CharField(max_length=40, choices=YEAR_BUILT_CHOICES, blank=True)
+    bedrooms = models.PositiveSmallIntegerField(choices=BEDROOM_CHOICES, default=1)
+    units_per_floor = models.PositiveSmallIntegerField(choices=UNITS_PER_FLOOR_CHOICES, default=1)
+    floor = models.SmallIntegerField(choices=FLOOR_CHOICES, default=1)
+    total_floors = models.SmallIntegerField(choices=TOTAL_FLOORS_CHOICES, default=1)
+    year_built = models.SmallIntegerField(choices=YEAR_BUILT_CHOICES, default=1)
 
     has_elevator = models.BooleanField(default=False)
     has_parking = models.BooleanField(default=False)
     has_storage = models.BooleanField(default=False)
     has_balcony = models.BooleanField(default=False)
 
+    occupancy_status = models.SmallIntegerField(choices=OCCUPANCY_STATUS_CHOICES, default=1)
+    deed_status = models.SmallIntegerField(choices=DEED_STATUS_CHOICES, default=1)
+
+    description = models.CharField(max_length=500, blank=True)
+
 
 class RentApartmentRequest(BaseRequest):
-    bedrooms = models.PositiveSmallIntegerField(choices=BEDROOM_CHOICES)
-    floor = models.SmallIntegerField(choices=FLOOR_CHOICES)
-    year_built = models.CharField(max_length=40, choices=YEAR_BUILT_CHOICES, blank=True)
+    bedrooms = models.PositiveSmallIntegerField(choices=BEDROOM_CHOICES, default=1)
+    year_built = models.SmallIntegerField(choices=YEAR_BUILT_CHOICES, blank=True, default=1)
 
-    deposit = models.BigIntegerField()
-    monthly_rent = models.BigIntegerField()
-    is_convertible = models.BooleanField(default=False)
+    min_deposit = models.BigIntegerField(null=True, blank=True)
+    max_deposit = models.BigIntegerField(null=True, blank=True)
+    min_monthly_rent = models.BigIntegerField(null=True, blank=True)
+    max_monthly_rent = models.BigIntegerField(null=True, blank=True)
 
     has_elevator = models.BooleanField(default=False)
     has_parking = models.BooleanField(default=False)
@@ -165,13 +224,21 @@ class LeaseApartmentRequest(BaseRequest):
     picture_5 = models.ImageField(upload_to="media/apartment/lease_apartment", blank=True)
 
     address = models.CharField(max_length=150)
-    bedrooms = models.PositiveSmallIntegerField(choices=BEDROOM_CHOICES)
-    floor = models.SmallIntegerField(choices=FLOOR_CHOICES, blank=True)
-    year_built = models.CharField(max_length=40, choices=YEAR_BUILT_CHOICES, blank=True)
+    bedrooms = models.PositiveSmallIntegerField(choices=BEDROOM_CHOICES, default=1)
+    floor = models.SmallIntegerField(choices=FLOOR_CHOICES, default=1)
+    total_floors = models.SmallIntegerField(choices=TOTAL_FLOORS_CHOICES, default=1)
+    year_built = models.SmallIntegerField(choices=YEAR_BUILT_CHOICES, default=1)
 
-    deposit = models.BigIntegerField()
-    monthly_rent = models.BigIntegerField()
+    exact_deposit = models.BigIntegerField(null=True, blank=True)
+    exact_monthly_rent = models.BigIntegerField(null=True, blank=True)
     is_convertible = models.BooleanField(default=False)
+
+    min_deposit = models.BigIntegerField(null=True, blank=True)
+    max_deposit = models.BigIntegerField(null=True, blank=True)
+    min_monthly_rent = models.BigIntegerField(null=True, blank=True)
+    max_monthly_rent = models.BigIntegerField(null=True, blank=True)
+
+    occupancy_status = models.SmallIntegerField(choices=OCCUPANCY_STATUS_CHOICES, default=1)
 
     has_elevator = models.BooleanField(default=False)
     has_parking = models.BooleanField(default=False)
