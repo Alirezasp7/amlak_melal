@@ -1,6 +1,6 @@
 from django import forms
 from .request_options import USER_TYPE_CHOICES, PROPERTY_TYPE_CHOICES, EXCLUDED_PROPERTY_TYPES
-from .models import BuyApartmentRequest, SellApartmentRequest, RentApartmentRequest
+from .models import BuyApartmentRequest, SellApartmentRequest, RentApartmentRequest, LeaseApartmentRequest
 
 class RequestSelectionForm(forms.Form):
     """
@@ -84,6 +84,7 @@ class SellApartmentRequestForm(forms.ModelForm):
             "address",
             "exact_area",
             "bedrooms",
+            "year_built",
             "units_per_floor",
             "floor",
             "exact_price",
@@ -100,6 +101,7 @@ class RentApartmentRequestForm(forms.ModelForm):
             "max_area",
             "bedrooms",
             "floor",
+            "year_built",
             "deposit",
             "monthly_rent",
             "is_convertible",
@@ -124,3 +126,25 @@ class RentApartmentRequestForm(forms.ModelForm):
                 max_field,
                 f"{label}: مقدار حداکثر باید بزرگ‌تر یا مساوی حداقل باشد."
             )
+
+
+class LeaseApartmentRequestForm(forms.ModelForm):
+    class Meta:
+        model = LeaseApartmentRequest
+        fields = [
+            "picture_1",
+            "picture_2",
+            "picture_3",
+            "picture_4",
+            "picture_5",
+            "district",
+            "address",
+            "exact_area",
+            "bedrooms",
+            "floor",
+            "year_built",
+            "deposit",
+            "monthly_rent",
+            "is_convertible",
+            "has_elevator", "has_parking", "has_storage", "has_balcony"
+        ]

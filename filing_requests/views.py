@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import redirect, render
 
-from .forms import RequestSelectionForm, BuyApartmentRequestForm, SellApartmentRequestForm, RentApartmentRequestForm
+from .forms import RequestSelectionForm, BuyApartmentRequestForm, SellApartmentRequestForm, RentApartmentRequestForm, LeaseApartmentRequestForm
 from .request_options import USER_TYPE_CHOICES, PROPERTY_TYPE_CHOICES, EXCLUDED_PROPERTY_TYPES, BUYER, SELLER, TENANT, LANDLORD, APARTMENT, COMMERCIAL, OFFICE, KOLANGI
 
 
@@ -29,6 +29,8 @@ def select_request_type(request):
                 return redirect("filing_requests:sell_apartment")
             elif user_type == "tenant" and property_type == "apartment":
                 return redirect("filing_requests:rent_apartment")
+            elif user_type == "landlord" and property_type == "apartment":
+                return redirect("filing_requests:lease_apartment")
             else:
                 form = RequestSelectionForm()
     else:
@@ -100,6 +102,25 @@ def rent_apartment_request(request):
         form = RentApartmentRequestForm()
 
     return render(request, "filing_requests/rent_apartment.html", {"form":form})
+
+
+@login_required
+def lease_apartment_request(request):
+    if request.method == "POST":
+        form = LeaseApartmentRequestForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            apartment_request = form.save(commit=False)
+            apartment_request.user = request.user
+            apartment_request.user_type = SELLER
+            apartment_request.property_type = APARTMENT
+            apartment_request.save()
+
+            return redirect("filing_requests:request_success")
+    else:
+        form = LeaseApartmentRequestForm()
+
+    return render(request, "filing_requests/lease_apartment.html", {"form":form})
 
 
 def request_success(request):
