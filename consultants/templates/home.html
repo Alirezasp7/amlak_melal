@@ -1,0 +1,39 @@
+{% for req in requests %}
+    <a class="card" href="{% url 'consultants:request_detail' req.content_type_id req.pk %}">
+        {# --- picture --- #}
+        <div class="card-image">
+            {% if req.picture_1 %}
+                <img src="{{ req.picture_1.url }}" alt="">
+            {% else %}
+                <div class="no-image">بدون تصویر</div>
+            {% endif %}
+        </div>
+
+        {# --- price --- #}
+        <div class="card-price">
+            {% if req.exact_price %}
+                {{ req.exact_price }} تومان
+            {% elif req.min_price %}
+                {{ req.min_price }} – {{ req.max_price }} تومان
+            {% elif req.deposit %}
+                ودیعه {{ req.deposit }} - اجاره {{ req.monthly_rent }}
+            {% elif req.min_deposit %}
+                ودیعه {{ req.min_deposit }}–{{ req.max_deposit }} - اجاره {{ req.min_rent }}–{{ req.max_rent }}
+            {% else %}
+                —
+            {% endif %}
+        </div>
+
+        {# --- district --- #}
+        <div class="card-district">
+            {{ req.district.name }}
+        </div>
+
+        {# --- type --- #}
+        <div class="card-type">
+            {{ req.get_user_type_display }} / {{ req.get_property_type_display }}
+        </div>
+    </a>
+{% empty %}
+    <p>درخواستی ثبت نشده است.</p>
+{% endfor %}

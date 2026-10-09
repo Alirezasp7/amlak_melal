@@ -1,4 +1,4 @@
-{% extends "filing_requests/base.html" %}
+{% extends "base.html" %}
 
 {% block title %}ثبت درخواست خرید آپارتمان{% endblock %}
 {% block page_title %}ثبت درخواست خرید آپارتمان{% endblock %}
@@ -8,20 +8,20 @@
     {% csrf_token %}
 
     <h2>مشخصات ملک</h2>
-    {% include "filing_requests/_field.html" with field=form.district %}
+    {% include "_field.html" with field=form.district %}
 
     <h2>متراژ (متر مربع)</h2>
-    {% include "filing_requests/_field.html" with field=form.min_area %}
-    {% include "filing_requests/_field.html" with field=form.max_area %}
+    {% include "_field.html" with field=form.min_area %}
+    {% include "_field.html" with field=form.max_area %}
 
     <h2>قیمت (تومان)</h2>
-    {% include "filing_requests/_field.html" with field=form.min_price %}
-    {% include "filing_requests/_field.html" with field=form.max_price %}
+    {% include "_field.html" with field=form.min_price %}
+    {% include "_field.html" with field=form.max_price %}
 
     <h2>ویژگی‌های آپارتمان</h2>
-    {% include "filing_requests/_field.html" with field=form.bedrooms %}
-    {% include "filing_requests/_field.html" with field=form.floor %}
-    {% include "filing_requests/_field.html" with field=form.year_built %}
+    {% include "_field.html" with field=form.bedrooms %}
+    {% include "_field.html" with field=form.floor %}
+    {% include "_field.html" with field=form.year_built %}
 
     <h2>امکانات</h2>
     <div>

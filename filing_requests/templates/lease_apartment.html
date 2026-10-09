@@ -1,4 +1,4 @@
-{% extends "filing_requests/base.html" %}
+{% extends "base.html" %}
 
 {% block title %}ثبت درخواست اجاره دادن آپارتمان{% endblock %}
 {% block page_title %}ثبت درخواست اجاره دادن آپارتمان{% endblock %}
@@ -8,14 +8,14 @@
     {% csrf_token %}
 
     <h2>مشخصات ملک</h2>
-    {% include "filing_requests/_field.html" with field=form.district %}
-    {% include "filing_requests/_field.html" with field=form.address %}
+    {% include "_field.html" with field=form.district %}
+    {% include "_field.html" with field=form.address %}
 
     <h2>متراژ و مشخصات</h2>
-    {% include "filing_requests/_field.html" with field=form.exact_area %}
-    {% include "filing_requests/_field.html" with field=form.bedrooms %}
-    {% include "filing_requests/_field.html" with field=form.floor %}
-    {% include "filing_requests/_field.html" with field=form.year_built %}
+    {% include "_field.html" with field=form.exact_area %}
+    {% include "_field.html" with field=form.bedrooms %}
+    {% include "_field.html" with field=form.floor %}
+    {% include "_field.html" with field=form.year_built %}
 
     <h2>شرایط مالی</h2>
 
@@ -27,23 +27,23 @@
     </div>
 
     <div id="exact-financials">
-        {% include "filing_requests/_field.html" with field=form.exact_deposit %}
-        {% include "filing_requests/_field.html" with field=form.exact_monthly_rent %}
+        {% include "_field.html" with field=form.exact_deposit %}
+        {% include "_field.html" with field=form.exact_monthly_rent %}
     </div>
 
     <div id="range-financials" style="display: none;">
-        {% include "filing_requests/_field.html" with field=form.min_deposit %}
-        {% include "filing_requests/_field.html" with field=form.max_deposit %}
-        {% include "filing_requests/_field.html" with field=form.min_monthly_rent %}
-        {% include "filing_requests/_field.html" with field=form.max_monthly_rent %}
+        {% include "_field.html" with field=form.min_deposit %}
+        {% include "_field.html" with field=form.max_deposit %}
+        {% include "_field.html" with field=form.min_monthly_rent %}
+        {% include "_field.html" with field=form.max_monthly_rent %}
     </div>
 
     <h2>تصاویر</h2>
-    {% include "filing_requests/_field.html" with field=form.picture_1 %}
-    {% include "filing_requests/_field.html" with field=form.picture_2 %}
-    {% include "filing_requests/_field.html" with field=form.picture_3 %}
-    {% include "filing_requests/_field.html" with field=form.picture_4 %}
-    {% include "filing_requests/_field.html" with field=form.picture_5 %}
+    {% include "_field.html" with field=form.picture_1 %}
+    {% include "_field.html" with field=form.picture_2 %}
+    {% include "_field.html" with field=form.picture_3 %}
+    {% include "_field.html" with field=form.picture_4 %}
+    {% include "_field.html" with field=form.picture_5 %}
 
     <h2>امکانات</h2>
     <div>

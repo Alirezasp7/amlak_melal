@@ -25,6 +25,7 @@ urlpatterns = [
     # path('control_panel/', include("control_panel.urls")),
     # # path('favorites/', include("favorites.urls")),
     # path('properties/', include("properties.urls")),
+    path('consultants/', include("consultants.urls")),
     path('requests/', include("filing_requests.urls")),
     path('', include("core.urls"))
 ]

@@ -14,12 +14,12 @@ def signup(request):
             return redirect('/') 
     else:
         form = SignUpForm()
-    return render(request, "/home/alirezasp/Documents/amlak_melal/templates/accounts/signup.html", {"form": form})
+    return render(request, "signup.html", {"form": form})
 
 
 
 class CustomLoginView(LoginView):
-    template_name = "/home/alirezasp/Documents/amlak_melal/templates/accounts/login.html"
+    template_name = "login.html"
     redirect_authenticated_user = True
 
 

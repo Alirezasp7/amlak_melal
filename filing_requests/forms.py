@@ -1,5 +1,5 @@
 from django import forms
-from .request_options import USER_TYPE_CHOICES, PROPERTY_TYPE_CHOICES, EXCLUDED_PROPERTY_TYPES
+from .choices import *
 from .models import BuyApartmentRequest, SellApartmentRequest, RentApartmentRequest, LeaseApartmentRequest
 
 class RequestSelectionForm(forms.Form):

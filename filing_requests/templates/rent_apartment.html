@@ -1,4 +1,4 @@
-{% extends "filing_requests/base.html" %}
+{% extends "base.html" %}
 
 {% block title %}ثبت درخواست اجاره آپارتمان{% endblock %}
 {% block page_title %}ثبت درخواست اجاره آپارتمان{% endblock %}
@@ -8,22 +8,22 @@
     {% csrf_token %}
 
     <h2>مشخصات ملک</h2>
-    {% include "filing_requests/_field.html" with field=form.district %}
+    {% include "_field.html" with field=form.district %}
 
     <h2>متراژ (متر مربع)</h2>
     <div>
-        {% include "filing_requests/_field.html" with field=form.min_area %}
-        {% include "filing_requests/_field.html" with field=form.max_area %}
+        {% include "_field.html" with field=form.min_area %}
+        {% include "_field.html" with field=form.max_area %}
     </div>
 
     <h2>ویژگی‌های آپارتمان</h2>
-    {% include "filing_requests/_field.html" with field=form.bedrooms %}
-    {% include "filing_requests/_field.html" with field=form.floor %}
-    {% include "filing_requests/_field.html" with field=form.year_built %}
-
+    {% include "_field.html" with field=form.bedrooms %}
+    {% include "_field.html" with field=form.floor %}
+    {% include "_field.html" with field=form.year_built %}
+filing_reque
     <h2>شرایط مالی</h2>
-    {% include "filing_requests/_field.html" with field=form.deposit %}
-    {% include "filing_requests/_field.html" with field=form.monthly_rent %}
+    {% include "_field.html" with field=form.deposit %}
+    {% include "_field.html" with field=form.monthly_rent %}
     <div>
         <label>{{ form.is_convertible }} {{ form.is_convertible.label }}</label>
         {% if form.is_convertible.errors %}

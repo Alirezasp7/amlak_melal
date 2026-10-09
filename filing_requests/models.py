@@ -1,116 +1,9 @@
 from django.conf import settings
 from django.db import models
 
-from .request_options import USER_TYPE_CHOICES, PROPERTY_TYPE_CHOICES
+from django.contrib.contenttypes.models import ContentType
 
-
-BEDROOM_CHOICES = [
-    (1, "۱"),
-    (2, "۲"),
-    (3, "۳"),
-    (4, "۴"),
-    (5, "۵+"),
-]
-
-FLOOR_CHOICES = [
-    (-1, "زیرزمین"),
-    (0, "همکف"),
-    (1, "۱"),
-    (2, "۲"),
-    (3, "۳"),
-    (4, "۴"),
-    (5, "۵"),
-    (6, "۶"),
-    (7, "۷"),
-    (8, "۸"),
-    (9, "۹"),
-    (10, "۱۰"),
-    (11, "۱۱"),
-    (12, "۱۲"),
-    (13, "۱۳"),
-    (14, "۱۴"),
-    (15, "۱۵"),
-]
-
-TOTAL_FLOORS_CHOICES = [
-    (1, "۱"),
-    (2, "۲"),
-    (3, "۳"),
-    (4, "۴"),
-    (5, "۵"),
-    (6, "۶"),
-    (7, "۷"),
-    (8, "۸"),
-    (9, "۹"),
-    (10, "۱۰"),
-    (11, "۱۱"),
-    (12, "۱۲"),
-    (13, "۱۳"),
-    (14, "۱۴"),
-    (15, "۱۵"),
-]
-
-YEAR_BUILT_CHOICES = [
-    (0, "نوساز"),
-    (1, "۱"),
-    (2, "۲"),
-    (3, "۳"),
-    (4, "۴"),
-    (5, "۵"),
-    (6, "۶"),
-    (7, "۷"),
-    (8, "۸"),
-    (9, "۹"),
-    (10, "۱۰"),
-    (11, "۱۱"),
-    (12, "۱۲"),
-    (13, "۱۳"),
-    (14, "۱۴"),
-    (15, "۱۵"),
-    (16, "۱۶"),
-    (17, "۱۷"),
-    (18, "۱۸"),
-    (19, "۱۹"),
-    (20, "۲۰"),
-    (21, "۲۱"),
-    (22, "۲۲"),
-    (23, "۲۳"),
-    (24, "۲۴"),
-    (25, "۲۵"),
-    (26, "۲۶"),
-    (27, "۲۷"),
-    (28, "۲۸"),
-    (29, "۲۹"),
-    (30, "۳۰+"),
-]
-
-UNITS_PER_FLOOR_CHOICES = [
-    (1, "۱"),
-    (2, "۲"),
-    (3, "۳"),
-    (4, "۴"),
-    (5, "۵"),
-    (6, "۶"),
-    (7, "۷"),
-    (8, "۸"),
-    (9, "۹"),
-    (10, "۱۰")
-]
-
-OCCUPANCY_STATUS_CHOICES = [
-    (1, "سکونت مالک"),
-    (2, "سکونت مستاجر"),
-    (3, "تخلیه")
-]
-
-DEED_STATUS_CHOICES = [
-    (1, "تک برگ"),
-    (2, "دفترچه ای"),
-    (3, "قولنامه ای"),
-    (4, "اوقاف"),
-    (5, "تعاونی"),
-    (6, "در دست اقدام")
-]
+from .choices import *
 
 
 class District(models.Model):
@@ -159,6 +52,10 @@ class BaseRequest(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    @property
+    def content_type_id(self):
+        return ContentType.objects.get_for_model(self.__class__).id
+    
 
     class Meta:
         abstract = True
@@ -182,12 +79,12 @@ class SellApartmentRequest(BaseRequest):
     picture_2 = models.ImageField(upload_to="media/apartment/sell_apartment/", blank=True)
     picture_3 = models.ImageField(upload_to="media/apartment/sell_apartment/", blank=True)
     picture_4 = models.ImageField(upload_to="media/apartment/sell_apartment/", blank=True)
-    picture_5 = models.ImageField(upload_to="amedia/apartment/sell_apartment/", blank=True)
+    picture_5 = models.ImageField(upload_to="media/apartment/sell_apartment/", blank=True)
     address = models.CharField(max_length=150)
     bedrooms = models.PositiveSmallIntegerField(choices=BEDROOM_CHOICES, default=1)
     units_per_floor = models.PositiveSmallIntegerField(choices=UNITS_PER_FLOOR_CHOICES, default=1)
     floor = models.SmallIntegerField(choices=FLOOR_CHOICES, default=1)
-    total_floors = models.SmallIntegerField(choices=TOTAL_FLOORS_CHOICES, default=1)
+    total_floors = models.PositiveSmallIntegerField(choices=TOTAL_FLOORS_CHOICES, default=1)
     year_built = models.SmallIntegerField(choices=YEAR_BUILT_CHOICES, default=1)
 
     has_elevator = models.BooleanField(default=False)
@@ -226,7 +123,7 @@ class LeaseApartmentRequest(BaseRequest):
     address = models.CharField(max_length=150)
     bedrooms = models.PositiveSmallIntegerField(choices=BEDROOM_CHOICES, default=1)
     floor = models.SmallIntegerField(choices=FLOOR_CHOICES, default=1)
-    total_floors = models.SmallIntegerField(choices=TOTAL_FLOORS_CHOICES, default=1)
+    total_floors = models.PositiveSmallIntegerField(choices=TOTAL_FLOORS_CHOICES, default=1)
     year_built = models.SmallIntegerField(choices=YEAR_BUILT_CHOICES, default=1)
 
     exact_deposit = models.BigIntegerField(null=True, blank=True)

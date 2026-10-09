@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}ثبت درخواست فروش آپارتمان{% endblock %}
+{% block page_title %}ثبت درخواست فروش آپارتمان{% endblock %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <h2>مشخصات ملک</h2>
+    {% include "_field.html" with field=form.district %}
+    {% include "_field.html" with field=form.address %}
+
+    <h2>متراژ و قیمت</h2>
+    {% include "_field.html" with field=form.exact_area %}
+    {% include "_field.html" with field=form.exact_price %}
+
+    <h2>ویژگی‌های آپارتمان</h2>
+    {% include "_field.html" with field=form.bedrooms %}
+    {% include "_field.html" with field=form.floor %}
+    {% include "_field.html" with field=form.total_floors %}
+    {% include "_field.html" with field=form.units_per_floor %}
+    {% include "_field.html" with field=form.year_built %}
+
+    <h2>وضعیت ملک</h2>
+    {% include "_field.html" with field=form.occupancy_status %}
+    {% include "_field.html" with field=form.deed_status %}
+
+    <h2>تصاویر</h2>
+    {% include "_field.html" with field=form.picture_1 %}
+    {% include "_field.html" with field=form.picture_2 %}
+    {% include "_field.html" with field=form.picture_3 %}
+    {% include "_field.html" with field=form.picture_4 %}
+    {% include "_field.html" with field=form.picture_5 %}
+
+    <h2>امکانات</h2>
+    <div>
+        <label>{{ form.has_elevator }} {{ form.has_elevator.label }}</label>
+        <label>{{ form.has_parking }} {{ form.has_parking.label }}</label>
+        <label>{{ form.has_storage }} {{ form.has_storage.label }}</label>
+        <label>{{ form.has_balcony }} {{ form.has_balcony.label }}</label>
+    </div>
+
+    {% if form.description %}
+        <h2>توضیحات</h2>
+        {% include "_field.html" with field=form.description %}
+    {% endif %}
+
+    {% if form.non_field_errors %}
+        <ul>
+            {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+        </ul>
+    {% endif %}
+
+    <button type="submit">ثبت درخواست</button>
+</form>
+{% endblock %}

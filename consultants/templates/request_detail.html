@@ -1,0 +1,113 @@
+{{% extends "base.html" %}
+
+{% block title %}جزئیات درخواست{% endblock %}
+{% block page_title %}جزئیات درخواست{% endblock %}
+
+{% block content %}
+
+    {# ===================== مشخصات پایه ===================== #}
+    <h2>مشخصات پایه</h2>
+    <p>نوع کاربر: {{ obj.get_user_type_display }}</p>
+    <p>نوع ملک: {{ obj.get_property_type_display }}</p>
+    <p>منطقه: {{ obj.district.name }}</p>
+    <p>تاریخ ثبت: {{ obj.created_at|date:"Y/m/d" }}</p>
+
+    {# ===================== قیمت و متراژ ===================== #}
+    <h2>قیمت و متراژ</h2>
+
+    {% if obj.user_type == "buyer" %}
+        <p>حداقل قیمت: {{ obj.min_price }}</p>
+        <p>حداکثر قیمت: {{ obj.max_price }}</p>
+        <p>حداقل متراژ: {{ obj.min_area }}</p>
+        <p>حداکثر متراژ: {{ obj.max_area }}</p>
+
+    {% elif obj.user_type == "seller" %}
+        <p>قیمت: {{ obj.exact_price }}</p>
+        <p>متراژ: {{ obj.exact_area }}</p>
+
+    {% elif obj.user_type == "tenant" %}
+        <p>حداقل ودیعه: {{ obj.min_deposit }}</p>
+        <p>حداکثر ودیعه: {{ obj.max_deposit }}</p>
+        <p>حداقل اجاره ماهانه: {{ obj.min_monthly_rent }}</p>
+        <p>حداکثر اجاره ماهانه: {{ obj.max_monthly_rent }}</p>
+        <p>حداقل متراژ: {{ obj.min_area }}</p>
+        <p>حداکثر متراژ: {{ obj.max_area }}</p>
+
+    {% elif obj.user_type == "landlord" %}
+        <p>متراژ: {{ obj.exact_area }}</p>
+        {% if obj.is_convertible %}
+            <p>قابل تبدیل: بله</p>
+            <p>حداقل ودیعه: {{ obj.min_deposit }}</p>
+            <p>حداکثر ودیعه: {{ obj.max_deposit }}</p>
+            <p>حداقل اجاره ماهانه: {{ obj.min_monthly_rent }}</p>
+            <p>حداکثر اجاره ماهانه: {{ obj.max_monthly_rent }}</p>
+        {% else %}
+            <p>قابل تبدیل: خیر</p>
+            <p>ودیعه: {{ obj.exact_deposit }}</p>
+            <p>اجاره ماهانه: {{ obj.exact_monthly_rent }}</p>
+        {% endif %}
+    {% endif %}
+
+    {# ===================== مشخصات آپارتمان ===================== #}
+    <h2>مشخصات آپارتمان</h2>
+
+    {% if obj.bedrooms %}
+        <p>تعداد اتاق خواب: {{ obj.get_bedrooms_display }}</p>
+    {% endif %}
+
+    {% if obj.year_built %}
+        <p>سال ساخت: {{ obj.get_year_built_display }}</p>
+    {% endif %}
+
+    {% if obj.floor %}
+        <p>طبقه: {{ obj.get_floor_display }}</p>
+    {% endif %}
+
+    {% if obj.total_floors %}
+        <p>تعداد کل طبقات: {{ obj.total_floors }}</p>
+    {% endif %}
+
+    {% if obj.units_per_floor %}
+        <p>تعداد واحد در طبقه: {{ obj.get_units_per_floor_display }}</p>
+    {% endif %}
+
+    {% if obj.occupancy_status %}
+        <p>وضعیت سکونت: {{ obj.get_occupancy_status_display }}</p>
+    {% endif %}
+
+    {% if obj.deed_status %}
+        <p>وضعیت سند: {{ obj.get_deed_status_display }}</p>
+    {% endif %}
+
+    {% if obj.address %}
+        <p>آدرس دقیق: {{ obj.address }}</p>
+    {% endif %}
+
+    {# ===================== امکانات ===================== #}
+    <h2>امکانات</h2>
+    <p>
+        {% if obj.has_elevator %}آسانسور{% endif %}
+        {% if obj.has_parking %} | پارکینگ{% endif %}
+        {% if obj.has_storage %} | انباری{% endif %}
+        {% if obj.has_balcony %} | بالکن{% endif %}
+    </p>
+
+    {# ===================== تصاویر ===================== #}
+    {% if obj.picture_1 or obj.picture_2 or obj.picture_3 or obj.picture_4 or obj.picture_5 %}
+        <h2>تصاویر</h2>
+        <div>
+            {% if obj.picture_1 %}<img src="{{ obj.picture_1.url }}" width="200">{% endif %}
+            {% if obj.picture_2 %}<img src="{{ obj.picture_2.url }}" width="200">{% endif %}
+            {% if obj.picture_3 %}<img src="{{ obj.picture_3.url }}" width="200">{% endif %}
+            {% if obj.picture_4 %}<img src="{{ obj.picture_4.url }}" width="200">{% endif %}
+            {% if obj.picture_5 %}<img src="{{ obj.picture_5.url }}" width="200">{% endif %}
+        </div>
+    {% endif %}
+
+    {# ===================== توضیحات ===================== #}
+    {% if obj.description %}
+        <h2>توضیحات</h2>
+        <p>{{ obj.description }}</p>
+    {% endif %}
+
+{% endblock %}
