@@ -10,7 +10,7 @@ from filing_requests.models import District
 # Create your models here.
 
 
-class Listing(models.Model):
+class Filing(models.Model):
     #provenance
     consultant = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -37,19 +37,19 @@ class Listing(models.Model):
     address = models.CharField(max_length=200, blank=True)
 
     #property details
-    area = models.PositiveIntegerField() 
+    area = models.PositiveIntegerField()
     total_floors = models.PositiveSmallIntegerField(choices=TOTAL_FLOORS_CHOICES, null=True, blank=True)
     floor = models.SmallIntegerField(choices=FLOOR_CHOICES, null=True, blank=True)
     units_per_floor = models.PositiveSmallIntegerField(choices=UNITS_PER_FLOOR_CHOICES, null=True, blank=True)
     bedrooms = models.PositiveSmallIntegerField(choices=BEDROOM_CHOICES, null=True, blank=True)
     year_built = models.SmallIntegerField(choices=YEAR_BUILT_CHOICES, null=True, blank=True)
-    occupancy_status = models.CharField(max_length=20, choices=OCCUPANCY_STATUS_CHOICES, blank=True)
-    deed_status = models.CharField(max_length=20, choices=DEED_STATUS_CHOICES, blank=True)
+    occupancy_status = models.PositiveIntegerField(max_length=20, choices=OCCUPANCY_STATUS_CHOICES, blank=True)
+    deed_status = models.PositiveIntegerField(max_length=20, choices=DEED_STATUS_CHOICES, blank=True)
 
     #pricing
     price = models.BigIntegerField(null=True, blank=True)
-    deposit = models.BigIntegerField(null=True, blank=True)
-    monthly_rent = models.BigIntegerField(null=True, blank=True)
+    exact_deposit = models.BigIntegerField(null=True, blank=True)
+    exact_monthly_rent = models.BigIntegerField(null=True, blank=True)
     is_convertible = models.BooleanField(default=False)
     min_monthly_rent = models.BigIntegerField(null=True, blank=True)
     max_monthly_rent = models.BigIntegerField(null=True, blank=True)
@@ -81,7 +81,26 @@ class Listing(models.Model):
 
     def __str__(self):
         return f"{self.title} ({self.get_listing_type_display()})"
-    
 
 
+class ConsultantRequest(models.Model): 
+    consultant = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="taken_requests",
+    )
 
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    request = GenericForeignKey("content_type", "object_id")
+
+    taken_at = models.DateTimeField(auto_now_add=True)
+
+
+    class Meta:
+        unique_together = ("consultant", "content_type", "object_id")
+        ordering = ["-taken_at"]
+
+
+    def __str__(self):
+        return f"{self.consultant.username} - {self.request}"

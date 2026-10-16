@@ -5,6 +5,15 @@
 
 {% block content %}
 
+    {% if has_taken %}
+        <p><strong>شما این درخواست را برداشته اید.</strong></p>
+    {% else %}
+        <form method="post" action="{% url 'consultants:take_request' ct_id obj.pk %}">
+            {% csrf_token %}
+            <button type="submit">برداشتن درخواست</button>
+        </form>
+    {% endif %}
+
     {# ===================== مشخصات پایه ===================== #}
     <h2>مشخصات پایه</h2>
     <p>نوع کاربر: {{ obj.get_user_type_display }}</p>

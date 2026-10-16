@@ -1,7 +1,9 @@
 from django.urls import path
-from .views import home
+from . import views
 
+app_name = "core"
 
 urlpatterns = [
-    path("", home, name= "home")
+    path("", views.home, name="home"),
+    path("file/<int:pk>/", views.file_detail, name= "file_detail")
 ]

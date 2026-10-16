@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}داشبورد مشاور{% endblock %}
+{% block page_title %}داشبورد مشاور{% endblock %}
+
+{% block content %}
+
+    <h2>پروفایل</h2>
+    <p>نام: {{ user.get_full_name|default:user.username }}</p>
+    <p>تلفن: {{ user.phone_number|default:"—" }}</p>
+    <p>درباره: {{ user.bio|default:"—" }}</p>
+
+    <h2>درخواست‌های من</h2>
+    {% for take in takes %}
+        <div>
+            {{ take.request.get_user_type_display }} /
+            {{ take.request.get_property_type_display }} —
+            {{ take.request.district.name }} —
+            {{ take.taken_at|date:"Y/m/d" }} —
+            <a href="{% url 'consultants:request_detail' take.content_type.id take.object_id %}">
+                مشاهده
+            </a>
+            <a href="{% url 'consultants:delete_request' take.content_type.id take.object_id %}">
+                حذف
+            </a>
+        </div>
+    {% empty %}
+        <p>هنوز درخواستی برنداشته اید.</p>
+    {% endfor %}
+        
+    <h2>فایل‌های من</h2>
+    {% for filing in draft_filings %}
+        <div>
+            {{ filing.title }} —
+            {{ filing.get_listing_type_display }} —
+            {{ filing.created_at|date:"Y/m/d" }}
+            <a href="{% url 'consultants:filing_edit' filing.pk %}">
+                ویرایش
+            </a>
+            <a href="{% url 'consultants:delete_filing' filing.pk %}">
+                حذف
+            </a>
+            <a href="{% url 'consultants:publish_filing' filing.pk %}">
+                انتشار
+            </a>
+        </div>
+    {% empty %}
+        <p>هنوز فایلی نساخته اید.</p>
+    {% endfor %}
+
+    <h2> فایل های منتشر شده من </h2>
+    {% for filing in published_filings %}
+        <div>
+            {{ filing.title }} —
+            {{ filing.get_listing_type_display }} —
+            {{ filing.created_at|date:"Y/m/d" }}
+            <a href="{% url 'consultants:filing_edit' filing.pk %}">
+                ویرایش
+            </a>
+            <a href="{% url 'consultants:unpublish_filing' filing.pk %}">
+                لغو انتشار
+            </a>
+        </div>
+    {% empty %}
+        <p> هنوز فایلی منتشر نکرده اید. </p>
+    {% endfor %}
+
+{% endblock %}
