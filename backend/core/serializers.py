@@ -4,8 +4,9 @@ from consultants.models import Filing
 class PublicFilingSerializer(serializers.ModelSerializer):
     district_name = serializers.CharField(source="district.name", read_only=True)
 
-    consultant_name = serializers.CharField(source="user.get_full_name", read_only=True)
-    consultant_phone_number = serializers.CharField(source="user.phone_number", read_only=True)
+    consultant_first_name = serializers.CharField(source="consultant.user.get_full_name", read_only=True)
+    consultant_phone_number = serializers.CharField(source="consultant.user.phone_number", read_only=True)
+    consultant_avatar = serializers.ImageField(source="consultant.avatar", read_only=True)
 
     property_type_display = serializers.CharField(source="get_property_type_display", read_only=True)
     listing_type_display = serializers.CharField(source="get_listing_type_display", read_only=True)
@@ -54,7 +55,7 @@ class PublicFilingSerializer(serializers.ModelSerializer):
             'picture_1', 'picture_2', 'picture_3', 'picture_4', 'picture_5',
             
             # Consultant
-            'consultant_name', 'consultant_phone_number',
+            'consultant_name', 'consultant_phone_number', ' consultant_avatar'
             
             # Meta
             'created_at', 'published_at', 'is_published'

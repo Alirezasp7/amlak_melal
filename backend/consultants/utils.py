@@ -65,7 +65,6 @@ def create_filing_from_request(req, user):
         district=req.district,
 
         # property details
-        address=getattr(req, "address", ""),
         area=getattr(req, "exact_area", None),
         bedrooms=getattr(req, "bedrooms", None),
         floor=getattr(req, "floor", None),

@@ -6,7 +6,7 @@
 {% block content %}
 
     <h2>پروفایل</h2>
-    <p>نام: {{ user.get_full_name|default:user.username }}</p>
+    <p>نام: {{ user.get_full_name|default:user.phone_number }}</p>
     <p>تلفن: {{ user.phone_number|default:"—" }}</p>
     <p>درباره: {{ user.bio|default:"—" }}</p>
 
@@ -20,9 +20,9 @@
             <a href="{% url 'consultants:request_detail' take.content_type.id take.object_id %}">
                 مشاهده
             </a>
-            <a href="{% url 'consultants:delete_request' take.content_type.id take.object_id %}">
-                حذف
-            </a>
+            <form method="post" action="{% url 'consultants:delete_request' take.content_type.id take.object_id %}" style="display:inline;">                {% csrf_token %}
+                <button type="submit">حذف</button>
+            </form>
         </div>
     {% empty %}
         <p>هنوز درخواستی برنداشته اید.</p>
@@ -37,12 +37,14 @@
             <a href="{% url 'consultants:filing_edit' filing.pk %}">
                 ویرایش
             </a>
-            <a href="{% url 'consultants:delete_filing' filing.pk %}">
-                حذف
-            </a>
-            <a href="{% url 'consultants:publish_filing' filing.pk %}">
-                انتشار
-            </a>
+            <form method="post" action="{% url 'consultants:delete_filing' filing.pk %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">حذف</button>
+            </form>
+            <form method="post" action="{% url 'consultants:publish_filing' filing.pk %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">انتشار</button>
+            </form>
         </div>
     {% empty %}
         <p>هنوز فایلی نساخته اید.</p>
@@ -57,9 +59,10 @@
             <a href="{% url 'consultants:filing_edit' filing.pk %}">
                 ویرایش
             </a>
-            <a href="{% url 'consultants:unpublish_filing' filing.pk %}">
-                لغو انتشار
-            </a>
+            <form method="post" action="{% url 'consultants:unpublish_filing' filing.pk %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">لغو انتشار</button>
+            </form>
         </div>
     {% empty %}
         <p> هنوز فایلی منتشر نکرده اید. </p>

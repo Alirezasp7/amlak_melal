@@ -109,8 +109,9 @@ def dashboard(request):
 
 @login_required
 @consultant_required
-def filing_edit(request, pk):
+def filing_edit(request, pk):  
     filing = get_object_or_404(Filing, pk=pk, consultant=request.user)
+    request_owner = filing.source_request.user
 
     form_class = FILING_FORM_MAP[(filing.property_type, filing.listing_type)]
 
@@ -125,7 +126,7 @@ def filing_edit(request, pk):
     else:
         form = form_class(instance=filing)
 
-    return render(request, "filing_edit.html", {"form":form, "filing":filing})
+    return render(request, "filing_edit.html", {"form":form, "filing":filing, "request_owner":request_owner})
 
 
 @login_required
