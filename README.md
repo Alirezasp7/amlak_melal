@@ -63,7 +63,7 @@ To keep the repository clean and stable, we follow a strict branching and commit
 Swagger (OpenAPI) is used for interactive API documentation and updates automatically.
 
 - **Swagger UI:** `http://127.0.0.1:8000/api/docs/`
-- **OpenAPI Schema (JSON):** `http://127.0.0.1:8000/api/schema/`
+- **OpenAPI Schema (JSON):** `http://127.0.0.1:8000/api/schema/`1
 
 ### Branching Rules
 1. Always pull the latest code from `master` before starting new work.
