@@ -119,4 +119,12 @@
         <p>{{ obj.description }}</p>
     {% endif %}
 
+    {# ===================== مشخصات کاربر ===================== #}
+    <h2>مشخصات کاربر</h2>
+    <p>
+        {{ obj.user.first_name }}
+        {{ obj.user.last_name }}
+        {{ obj.user.phone_number }}
+    </p>  
+
 {% endblock %}

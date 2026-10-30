@@ -19,6 +19,14 @@
             </ul>
         </div>
     {% endif %}
+    
+    {# ===================== مشخصات کاربر ===================== #}
+    <h2>مشخصات کاربر</h2>
+    <p>
+        {{ request_owner.first_name }}
+        {{ request_owner.last_name }}
+        {{ request_owner.phone_number }}
+    </p>  
 
     <h2>مشخصات فایل</h2>
     {% include "_field.html" with field=form.title %}
