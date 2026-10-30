@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>ورود موفق</title>
+</head>
+<body style="font-family: Tahoma; padding: 50px; text-align: center;">
+    <h1 style="color: green;">ورود موفقیت‌آمیز بود!</h1>
+    <p>شماره شما: {{ user.phone_number }}</p>
+    
+    {% if created %}
+        <p style="color: blue;">وضعیت: کاربر جدید ایجاد شد. (ثبت‌نام موفق)</p>
+    {% else %}
+        <p style="color: blue;">وضعیت: کاربر قبلی وارد شد. (ورود موفق)</p>
+    {% endif %}
+    
+    <br>
+    <a href="{% url 'accounts:temp_login' %}">خروج و بازگشت به صفحه ورود</a>
+</body>
+</html>

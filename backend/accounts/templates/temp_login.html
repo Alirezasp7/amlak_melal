@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تست ورود</title>
+</head>
+<body style="font-family: Tahoma; padding: 50px; text-align: center;">
+    <h2>تست سیستم احراز هویت</h2>
+    
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" style="max-width: 300px; margin: 0 auto;">
+        {% csrf_token %}
+        
+        {% if step == "request" %}
+            <input type="hidden" name="step" value="request_otp">
+            <label>شماره موبایل:</label><br>
+            <input type="text" name="phone_number" placeholder="09123456789" required style="margin: 10px 0; padding: 5px; width: 100%;">
+            <button type="submit" style="padding: 5px 20px;">ارسال کد</button>
+        
+        {% elif step == "verify" %}
+            <input type="hidden" name="step" value="verify_otp">
+            <input type="hidden" name="phone_number" value="{{ phone }}">
+            <p>کد به شماره {{ phone }} ارسال شد (ترمینال را چک کنید)</p>
+            <label>کد ۵ رقمی:</label><br>
+            <input type="text" name="code" required style="margin: 10px 0; padding: 5px; width: 100%;">
+            <button type="submit" style="padding: 5px 20px;">تایید کد</button>
+        {% endif %}
+        <a href="{% url 'accounts:temp_password_login' %}">ورود با رمز عبور</a> | 
+    </form>
+</body>
+</html>

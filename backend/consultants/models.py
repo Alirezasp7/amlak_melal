@@ -42,8 +42,8 @@ class Filing(models.Model):
     units_per_floor = models.PositiveSmallIntegerField(choices=UNITS_PER_FLOOR_CHOICES, null=True, blank=True)
     bedrooms = models.PositiveSmallIntegerField(choices=BEDROOM_CHOICES, null=True, blank=True)
     year_built = models.SmallIntegerField(choices=YEAR_BUILT_CHOICES, null=True, blank=True)
-    occupancy_status = models.PositiveIntegerField(max_length=20, choices=OCCUPANCY_STATUS_CHOICES, blank=True)
-    deed_status = models.PositiveIntegerField(max_length=20, choices=DEED_STATUS_CHOICES, blank=True)
+    occupancy_status = models.PositiveIntegerField(choices=OCCUPANCY_STATUS_CHOICES, blank=True)
+    deed_status = models.PositiveIntegerField(choices=DEED_STATUS_CHOICES, blank=True)
 
     #pricing
     price = models.BigIntegerField(null=True, blank=True)
