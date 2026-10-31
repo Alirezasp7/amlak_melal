@@ -1,0 +1,51 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 24px;
+  height: 60px;
+  list-style: none;
+  background: var(--blue-200);
+  border-bottom: 1px solid var(--blue-400);
+  overflow-x: auto;
+}
+
+.navbar-button {
+  flex: 0 0 auto;
+}
+
+.Navbar-Link {
+  display: block;
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.Navbar-Link:hover {
+  background: var(--white);
+  color: var(--blue-600);
+}
+
+/* Works if you switch <Link> to <NavLink> in Navbar.js */
+.Navbar-Link.active {
+  background: var(--white);
+  color: var(--blue-600);
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    padding: 0 12px;
+  }
+
+  .Navbar-Link {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+}

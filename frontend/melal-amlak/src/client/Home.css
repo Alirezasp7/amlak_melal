@@ -1,0 +1,108 @@
+/* Everything stacks vertically: SearchFilter, greeting, then the cards */
+.home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 32px 20px 96px;
+}
+
+.home-page > * {
+  width: 100%;
+  max-width: 600px;
+}
+
+.name-header {
+  margin: 8px 0 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+/* Card link wrapper */
+.home-page > a {
+  display: block;
+}
+
+/* Card */
+.Holder {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 12px 16px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.home-page > a:hover .Holder {
+  border-color: var(--blue-400);
+  transform: translateY(-2px);
+}
+
+.home-list-picture {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 10px;
+  background: var(--blue-100);
+  margin-bottom: 6px;
+}
+
+.Price-Tag {
+  flex: 1 1 100%;
+  margin: 4px 4px 2px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* Elevator / parking pills */
+.Ckeck-P {
+  margin: 0 0 0 4px;
+  padding: 4px 12px;
+  background: var(--blue-100);
+  color: var(--blue-600);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Floating add button */
+.addition-button {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  width: 52px;
+  height: 52px;
+  max-width: none;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--blue-600);
+  color: var(--white);
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(47, 127, 201, 0.35);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.addition-button:hover {
+  background: #266aad;
+  transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+  .home-page {
+    padding: 20px 14px 96px;
+  }
+
+  .home-list-picture {
+    height: 190px;
+  }
+}
