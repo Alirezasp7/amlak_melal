@@ -35,3 +35,11 @@ Thumbs.db
 .vscode/
 .idea/
 *.log
+
+# Environment Variables
+.env
+.env.*
+!.env.example
+
+# Docker
+postgres_data/
