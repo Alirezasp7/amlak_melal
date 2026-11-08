@@ -1,17 +1,60 @@
-// import RealState from "../data/REALSTATELIST.json";
 import { Link } from 'react-router-dom';
-// import 'Home.css';
 import { useNavigate } from 'react-router-dom';
 // import SearchFilter from '../SearchFilter';
-
+import { useState, useEffect } from 'react';
 import './Home.css';
 
-const Home = async () => {
+const ApiListResposnse = () => {
 
-    
-    const response = await fetch(`http://127.0.0.1:8000/api/schema/`);
-    const RealEstate = response.json();
-    
+    const [list, setList] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null)
+    const fetchUsers = async () => {
+            try {
+                const response = await fetch('http://localhost:8000/RealEtateList');
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch users');
+                }
+
+                const RealEstates = await response.json();
+                setList(RealEstates);
+
+            } catch (err) {
+                setError(err.message);
+
+            } finally {
+                setLoading(false);
+            }
+    };
+
+
+    useEffect(() => {
+        fetchUsers();
+    },[])
+
+    if (loading) {
+        return <h2>Loading...</h2>;
+    }
+    if (error) {
+        return <h2>Error: {error}</h2>;
+    }
+
+    return (
+        <>
+        {list.map((item, index) => (
+            <Link to={`/Home/${item.id}`} key={item.id} >
+                <div className='Holder' key={index}>
+                    <img src={item.img1} alt="Real estate item" className='home-list-picture'/>
+                    <p className='Price-Tag'>Price: {item.price}</p>
+                </div>
+            </Link>
+        ))}
+        </>
+    )
+}
+
+const Home = () => {
 
     const Name = "Barbod"
     const Navigate = useNavigate();
@@ -20,18 +63,10 @@ const Home = async () => {
         <div className="homePage">
             <h1 className="name-header">Hello {Name}</h1>
             <button className='addition-button' onClick={() => (Navigate("/Home/Addition"))}>+</button>
-                {RealEstate.map((item, index) => (
-                    <Link to={`/Home/${item.id}`} key={item.id} >
-                    <div className='Holder' key={index}>
-                        {/* Use 'item.' instead of 'RealState.' */}
-                        <img src={item.img} alt="Real estate item" className='home-list-picture'/>
-                        <p className='Price-Tag'>Price: {item.price}</p>
-                    </div>
-                    </Link>
-                ))}
-            </div>
-        // <h2>Hallo</h2>
+            <ApiListResposnse />
+        </div>
     )
 }
+
 
 export default Home;
