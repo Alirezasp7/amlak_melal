@@ -4,3 +4,4 @@ djangorestframework-simplejwt
 django_cors_headers
 drf-spectacular
 pillow
+django-environ
