@@ -4,10 +4,11 @@ import {
   Route,
  BrowserRouter as Router
   } from 'react-router-dom';
-// import About from './client/About.js';
 import Home from './client/Home';
 import Navbar from './functions/Navbar';
 import About from './About'
+import Detail from './Detail';
+import Addition from './client/Addition';
 // import Details from './client/Details.js';
 // import Consultant from '../src/consultant/Consultant.js'
 // import Dashboard from './consultant/Dashboard.js';
@@ -27,8 +28,9 @@ function App() {
         <Routes>
           <Route path='/About' element={<About/>} />
           <Route path='/' element={<Home/>} />
-          {/* <Route path="/Home/:id" element={<Details/>} />
-          <Route path='/Consultant' element={<Consultant/>} />
+          <Route path="/Home/:id" element={<Detail/>} />
+          <Route path='/Home/Addition' element={<Addition/>} />
+          {/* <Route path='/Consultant' element={<Consultant/>} />
           <Route path='/Consultant/Dashboard' element={<Dashboard/>} />
           <Route path='/Consultant/Dashboard/:id' element={<ConsultantAffirmation/>}/>
           <Route path='/SignIn' element={<SignIn/>} />

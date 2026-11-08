@@ -1,14 +1,14 @@
-import NavigateBackButton from "../NavigationButton";
+
 import { useNavigate } from "react-router-dom";
 
 const Addition = () => {
 
-const AdditionButton = () => {
-    Navigate(-1);
-    console.log('added');
-}
+    const AdditionButton = () => {
+        Navigate(-1);
+        console.log('added');
+    }
 
-const Navigate = useNavigate();
+    const Navigate = useNavigate();
 
     return(
         <div className="addition-page">
