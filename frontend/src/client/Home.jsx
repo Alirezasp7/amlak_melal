@@ -2,35 +2,41 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 // import SearchFilter from '../SearchFilter';
 import { useState, useEffect } from 'react';
-import './Home.css';
+import './design/Home.css';
 
 const ApiListResposnse = () => {
 
     const [list, setList] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null)
+    const apiIsEmpty = list.length === 0;
+
     const fetchUsers = async () => {
             try {
-                const response = await fetch('http://localhost:8000/RealEtateList');
+                const response = await fetch('http://localhost:8000/realEstates', {method:"GET"});
 
                 if (!response.ok) {
-                    throw new Error('Failed to fetch users');
+                    throw new Error('Failed to fetch list');
                 }
 
                 const RealEstates = await response.json();
                 setList(RealEstates);
+                console.log(list);
+                console.log('type:', typeof list);
+                console.log(Array.isArray(list));
 
             } catch (err) {
                 setError(err.message);
 
             } finally {
                 setLoading(false);
-            }
+            } 
     };
 
 
     useEffect(() => {
         fetchUsers();
+
     },[])
 
     if (loading) {
@@ -39,7 +45,9 @@ const ApiListResposnse = () => {
     if (error) {
         return <h2>Error: {error}</h2>;
     }
-
+    if(apiIsEmpty) {
+        return <h2>an error has occured.</h2>
+    }
     return (
         <>
         {list.map((item, index) => (

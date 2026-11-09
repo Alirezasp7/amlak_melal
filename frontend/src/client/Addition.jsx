@@ -1,4 +1,4 @@
-
+import GoBackButton from "../components/GoBackButton";
 import { useNavigate } from "react-router-dom";
 
 const Addition = () => {
@@ -12,7 +12,7 @@ const Addition = () => {
 
     return(
         <div className="addition-page">
-
+            <GoBackButton/>
             <p>Picture1:<input type="file"></input></p>
             <p>Picture2:<input type="file"></input></p>
             <p>Picture3:<input type="file"></input></p>
