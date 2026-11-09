@@ -1,0 +1,14 @@
+.B{
+    padding: 12px;
+    margin: 12px;
+    background-color: var(--blue-200);
+    border-radius: 8px;
+    border-color: var(--blue-400);
+    border-width: 1px;
+    color: black;
+}
+.B:hover{
+    background: var(--white);
+    color: var(--blue-600);
+
+}
