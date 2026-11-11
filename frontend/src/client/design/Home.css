@@ -56,8 +56,34 @@
 
 .Price-Tag {
   flex: 1 1 100%;
-  margin: 4px 4px 2px;
+  margin: 1px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.real-estate-title{
+  flex: 1 1 100%;
+  margin: 1px;
   font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--ink);
+
+}
+
+.real-estate-district{
+  flex: 1 1 100%;
+  margin: 1px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink);
+
+}
+
+.real-estate-listing-type {
+  flex: 1 1 100%;
+  margin: 1px;
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--ink);
 }
@@ -106,4 +132,9 @@
   .home-list-picture {
     height: 190px;
   }
+}
+.placement{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 10px;
 }

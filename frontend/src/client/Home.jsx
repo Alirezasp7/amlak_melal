@@ -13,7 +13,7 @@ const ApiListResposnse = () => {
 
     const fetchUsers = async () => {
             try {
-                const response = await fetch('http://localhost:8000/realEstates', {method:"GET"});
+                const response = await fetch('http://localhost:8001/realEstates', {method:"GET"});
 
                 if (!response.ok) {
                     throw new Error('Failed to fetch list');
@@ -46,19 +46,23 @@ const ApiListResposnse = () => {
         return <h2>Error: {error}</h2>;
     }
     if(apiIsEmpty) {
-        return <h2>an error has occured.</h2>
+        return <h2>Error: List is empty.</h2>
     }
     return (
-        <>
+        <div className='placement'>
         {list.map((item, index) => (
             <Link to={`/Home/${item.id}`} key={item.id} >
                 <div className='Holder' key={index}>
                     <img src={item.img1} alt="Real estate item" className='home-list-picture'/>
-                    <p className='Price-Tag'>Price: {item.price}</p>
+                    <p className='real-estate-title'>{item.title}</p>
+                    <p className='Price-Tag'>Price: {item.price}</p> 
+                    <p className='real-estate-district'>{item.district}</p>
+                    <p className='real-estate-listing-type'>{item.listing_type}</p>
+                    
                 </div>
             </Link>
         ))}
-        </>
+        </div>
     )
 }
 

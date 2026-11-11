@@ -1,0 +1,19 @@
+.message-box{
+  color: black;
+  background-color: var(--blue-200);
+  padding: 8px;
+  margin: 12px;
+  border-radius: 8px;
+  border-color: var(--blue-400);
+}
+
+.conteiner{
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-align: center;
+  justify-content: center;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
