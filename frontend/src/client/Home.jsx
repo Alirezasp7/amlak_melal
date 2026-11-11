@@ -13,7 +13,7 @@ const ApiListResposnse = () => {
 
     const fetchUsers = async () => {
             try {
-                const response = await fetch('http://localhost:8000/realEstates', {method:"GET"});
+                const response = await fetch('http://localhost:8000/api/v1/public-filings/', {method:"GET"});
 
                 if (!response.ok) {
                     throw new Error('Failed to fetch list');
