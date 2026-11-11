@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect,useState } from "react";
 import GoBackButton from "../components/GoBackButton";
+import './design/Details.css';
 
 const Details = () => {
     return(
@@ -40,7 +41,6 @@ const ApiDetailResposnse = () => {
             }
         };
 
-
     useEffect(() => {
         fetchUsers();
     },[id])
@@ -52,10 +52,10 @@ const ApiDetailResposnse = () => {
         return <h2>Error: {error}</h2>;
     }
     if(property) {
-        return(       
+        return(        
             <div className='Detail-page'>
-                <img className='picture' src={`/${property.img1}`} alt="Real estate item"></img>
-                <h2 className='Price'>{property.price}</h2>
+                <img className='picture' src={`/${property.img1}`} alt="Real estate item" />
+                <h2 className='Price'>Price: {property.price}</h2>
                 {/* {property.elavator ? <p className='Ckeck-P'>elavator:true</p> : <p className='Ckeck-P'>elavator:false</p>}
                 {property.parking ? <p className='Ckeck-P'>parking:true</p> : <p className='Ckeck-P'>parking:false</p>} */}
             </div>
