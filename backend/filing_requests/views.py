@@ -1,9 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import redirect, render
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 
 from .forms import RequestSelectionForm, BuyApartmentRequestForm, SellApartmentRequestForm, RentApartmentRequestForm, LeaseApartmentRequestForm
 from .choices import USER_TYPE_CHOICES, PROPERTY_TYPE_CHOICES, EXCLUDED_PROPERTY_TYPES, BUYER, SELLER, TENANT, LANDLORD, APARTMENT, COMMERCIAL, OFFICE, KOLANGI
+from .serializers import BuyApartmentSerializer, SellApartmentSerializer, RentApartmentSerializer, LeaseApartmentSerializer, BuyOfficeSerializer, SellOfficeSerializer, RentOfficeSerializer, LeaseOfficeSerializer
 
 
 REQUEST_TYPE_LABELS = dict(USER_TYPE_CHOICES)
@@ -41,6 +44,103 @@ def select_request_type(request):
     )
 
 
+class BuyApartmentCreateView(generics.CreateAPIView):
+    serializers_class = BuyApartmentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializers):
+        serializers.save(
+            user=self.request.user,
+            user_type="buyer",
+            property_type="apartment"
+        )
+
+
+class SellApartmentCreateView(generics.CreateAPIView):
+    serializer_class = SellApartmentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializers):
+        serializers.save(
+            user=self.request.user,
+            user_type="seller",
+            property_type="apartment" 
+        )
+
+
+class RentApartmentCreateView(generics.CreateAPIView):
+    serializer_class = RentApartmentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializers):
+        serializers.save(
+            user=self.request.user,
+            user_type="tenant",
+            property_type="apartment" 
+        )
+
+
+class LeaseApartmentCreateView(generics.CreateAPIView):
+    serializer_class = LeaseApartmentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializers):
+        serializers.save(
+            user=self.request.user,
+            user_type="landlord",
+            property_type="apartment" 
+        )
+
+
+class BuyOfficeCreateView(generics.CreateAPIView):
+    serializer_class = BuyOfficeSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializers):
+        serializers.save(
+            user=self.request.user,
+            user_type="buyer",
+            property_type="office" 
+        )
+
+
+class SellOfficeCreateView(generics.CreateAPIView):
+    serializer_class = SellOfficeSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializers):
+        serializers.save(
+            user=self.request.user,
+            user_type="seller",
+            property_type="office" 
+        )
+
+
+class RentOfficeCreateView(generics.CreateAPIView):
+    serializer_class = RentOfficeSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializers):
+        serializers.save(
+            user=self.request.user,
+            user_type="tenant",
+            property_type="office" 
+        )
+
+
+class LeaseOfficeCreateView(generics.CreateAPIView):
+    serializer_class = LeaseOfficeSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializers):
+        serializers.save(
+            user=self.request.user,
+            user_type="seller",
+            property_type="apartment" 
+        )
+
+
+# remove after the pages are built in frontend
 @login_required
 def buy_apartment_request(request):
     if request.method == "POST":
