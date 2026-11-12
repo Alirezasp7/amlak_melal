@@ -11,19 +11,9 @@ const Navbar = () => {
             <li className='navbar-button'>
                <Link className='Navbar-Link' to="/About">About</Link> 
             </li>
-
-            {/* <li className='navbar-button'>
-                <Link className='Navbar-Link' to="/Consultant">consultant</Link>
-            </li>
             <li className='navbar-button'>
-                <Link className='Navbar-Link' to="/SignIn">SignIn</Link>
+               <Link className='Navbar-Link' to="/SignUp">Account</Link> 
             </li>
-            <li className='navbar-button'>
-                <Link className='Navbar-Link' to="/Favorites">Favorites</Link>
-            </li>
-            <li className='navbar-button'>
-                <Link className='Navbar-Link' to="/BookMarks">BookMarks</Link>
-            </li> */}
         </ul>
     )
 }

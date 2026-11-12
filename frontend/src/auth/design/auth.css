@@ -1,0 +1,23 @@
+.container{
+    justify-content: center;
+    display: grid;
+    border: 0px none var(--blue-200);
+    border-radius: 6px;
+    background-color: var(--blue-200);
+    margin: 12px;
+}
+.auth-page{
+    justify-content: center;
+    margin-top: 80px;
+}
+.sign-up-button{
+    padding: 12px;
+    margin: 6px;
+    background-color: white;
+    border-radius: 6px;
+    border-color: var(--blue-400);
+    border-width: 1px;
+}
+.sign-up-button:hover{
+    background-color: var(--blue-200);
+}

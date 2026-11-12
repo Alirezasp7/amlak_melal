@@ -1,3 +1,36 @@
 .addition-page{
-    margin-top: 70px;
+    margin-top: 80px;
+}
+
+.listing-type-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border-width: 0px;
+    background-color: var(--blue-200);
+    padding: 12px;
+    margin: 12px;
+    font-size: 1rem;
+}
+.select-form{
+    border: 0px solid var(--blue-400);
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 1.2rem;
+}
+.select-form > option{
+    font-size: 1.2rem;
+    padding: 5px;
+}
+button{
+    padding: 12px;
+    margin: 6px;
+    background-color: var(--blue-200);
+    border-radius: 6px;
+    border-color: var(--blue-400);
+    border-width: 1px;
+}
+button:hover{
+    background-color: white;
 }
