@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const Addition = () => {
 
+    const Navigate = useNavigate();
 
     const [propertyType, setPropertyType] = useState('office');
     const [ClientType, setClientType] = useState('buyer');
@@ -27,6 +28,7 @@ const Addition = () => {
         //apartment
         if(propertyType == 'apartment' && ClientType == 'buyer'){
             console.log(propertyType," ",ClientType);
+            Navigate('/Home/Addition/ApartmentBuy');
         }
         if(propertyType == 'apartment' && ClientType == 'seller'){
             console.log(propertyType," ",ClientType);
