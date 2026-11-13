@@ -1,0 +1,146 @@
+/* Form card (uses the design tokens from App.css) */
+.addition-page {
+  width: calc(100% - 28px);
+  max-width: 640px;
+  margin: 70px auto 48px;
+  padding: 12px 32px 32px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+ 
+/* Every row: label on the left, field on the right */
+.addition-page > h3,
+.addition-page > p {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--ink-soft); /* unit text like "billion" and "meter" */
+}
+ 
+.addition-page > p:last-of-type {
+  border-bottom: none;
+}
+ 
+.addition-page label {
+  flex: 0 0 190px;
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+ 
+/* Text, number and textarea fields */
+.addition-page input[type="text"],
+.addition-page input[type="number"],
+.addition-page textarea {
+  flex: 1;
+  min-width: 0;
+  height: 42px;
+  padding: 0 14px;
+  background: var(--blue-50);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+ 
+.addition-page textarea {
+  height: 110px;
+  padding: 12px 14px;
+  resize: vertical;
+}
+ 
+.addition-page input[type="text"]:focus,
+.addition-page input[type="number"]:focus,
+.addition-page textarea:focus {
+  outline: none;
+  background: var(--white);
+  border-color: var(--blue-600);
+}
+ 
+/* File inputs */
+.addition-page input[type="file"] {
+  flex: 1;
+  min-width: 0;
+  color: var(--ink-soft);
+  font-family: inherit;
+  font-size: 0.85rem;
+}
+ 
+.addition-page input[type="file"]::file-selector-button {
+  margin-right: 12px;
+  padding: 8px 14px;
+  background: var(--blue-100);
+  border: 1px solid var(--blue-200);
+  border-radius: 8px;
+  color: var(--blue-600);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+ 
+.addition-page input[type="file"]::file-selector-button:hover {
+  background: var(--blue-200);
+}
+ 
+/* Checkbox rows: label takes the space, box sits on the right */
+.addition-page input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--blue-600);
+  cursor: pointer;
+}
+ 
+.addition-page > p:has(input[type="checkbox"]) label {
+  flex: 1;
+  cursor: pointer;
+}
+ 
+/* Submit button */
+.addition-page > input[type="button"] {
+  display: block;
+  width: 100%;
+  height: 48px;
+  margin-top: 24px;
+  border: none;
+  border-radius: 12px;
+  background: var(--blue-600);
+  color: var(--white);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(47, 127, 201, 0.3);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+ 
+.addition-page > input[type="button"]:hover {
+  background: #266aad;
+  transform: translateY(-1px);
+}
+ 
+@media (max-width: 560px) {
+  .addition-page {
+    padding: 8px 18px 24px;
+  }
+ 
+  .addition-page label {
+    flex: 1 1 100%;
+  }
+ 
+  .addition-page > p:has(input[type="checkbox"]) label {
+    flex: 1;
+  }
+}
+ 

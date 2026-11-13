@@ -10,6 +10,7 @@ import About from './About'
 import Details from './client/Details';
 import Addition from './client/Addition';
 import SignUp from './auth/SignUp';
+import ApartmentBuy from '../src/client/propertyListing/apartment/ApartmentBuy';
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
           <Route path="/Home/:id" element={<Details/>} />
           <Route path='/Home/Addition' element={<Addition/>} />
           <Route path='/SignUp' element={<SignUp/>} />
+          {/* property listing */}
+          <Route path='/Home/Addition/ApartmentBuy' element={<ApartmentBuy />}/>
         </Routes>
       </div>
     </Router>
