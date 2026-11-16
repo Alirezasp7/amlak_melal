@@ -1,19 +1,57 @@
-.message-box{
-  color: black;
-  background-color: var(--blue-200);
-  padding: 8px;
-  margin: 12px;
-  border-radius: 8px;
-  border-color: var(--blue-400);
+/*
+  NOTE: display is intentionally NOT set here.
+  The component controls it through its inline style (none / block),
+  and an inline style always wins over this file anyway.
+
+  Your JSX uses className="container", so this targets any container that
+  directly holds a .message-box (it won't touch other ".container" elements).
+  If you rename the class to "message-container", the first selector covers it.
+*/
+.message-container,
+.container:has(> .message-box) {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(244, 249, 254, 0.55);
+  backdrop-filter: blur(3px);
+  pointer-events: none; /* never traps the user on the page */
 }
 
-.conteiner{
-  position: fixed;
-  top: 0;
-  left: 0;
+/* Centered without flex/grid, so it works when display is just "block" */
+.message-box {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: fit-content;
+  height: fit-content;
+  min-width: 220px;
+  max-width: calc(100% - 40px);
+  padding: 22px 36px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--blue-600);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 40px rgba(31, 78, 125, 0.18);
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 500;
   text-align: center;
-  justify-content: center;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+  animation: message-pop 0.2s ease-out;
+}
+
+@keyframes message-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .message-box {
+    animation: none;
+  }
 }

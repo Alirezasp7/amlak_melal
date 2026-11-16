@@ -14,12 +14,13 @@ const Details = () => {
 
 const ApiDetailResposnse = () => {
 
+
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [property, setProperty] = useState(null);
 
-    const fetchUsers = async () => {
+    const fetchDetails = async () => {
             try {
                 const response = await fetch(`http://localhost:8000/api/v1/public-filings`, {method:"GET"});
 
@@ -42,8 +43,10 @@ const ApiDetailResposnse = () => {
         };
 
     useEffect(() => {
-        fetchUsers();
+        fetchDetails();
     },[id])
+
+
 
     if (loading) {
         return <h2>Loading...</h2>;

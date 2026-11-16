@@ -113,10 +113,14 @@ const ApartmentBuy = () => {
     };
 
     useEffect(() => {
-        if (error) {
-            alert(`Error: ${error}`);
+        if (!isSending) {
+            const timer = setTimeout(() => {
+                setDisplay('none');
+            }, 3000);
+
+        return () => clearTimeout(timer);
         }
-    }, [error]);
+    }, [isSending]);
 
     useEffect(() => {
         if (!added) {
@@ -125,7 +129,7 @@ const ApartmentBuy = () => {
 
         const timeoutId = setTimeout(() => {
             Navigate(-1);
-        }, 7000);
+        }, 4000);
 
         return () => clearTimeout(timeoutId);
     }, [added, Navigate]);

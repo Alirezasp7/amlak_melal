@@ -11,7 +11,7 @@ const ApiListResposnse = () => {
     const [error, setError] = useState(null)
     const apiIsEmpty = list.length === 0;
 
-    const fetchUsers = async () => {
+    const fetchRealStateList = async () => {
             try {
                 const response = await fetch('http://localhost:8000/api/v1/public-filings/', {method:"GET"});
 
@@ -21,10 +21,7 @@ const ApiListResposnse = () => {
 
                 const RealEstates = await response.json();
                 setList(RealEstates);
-                console.log(list);
-                console.log('type:', typeof list);
-                console.log(Array.isArray(list));
-
+                
             } catch (err) {
                 setError(err.message);
 
@@ -35,7 +32,7 @@ const ApiListResposnse = () => {
 
 
     useEffect(() => {
-        fetchUsers();
+        fetchRealStateList();
 
     },[])
 

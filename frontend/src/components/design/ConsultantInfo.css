@@ -1,0 +1,148 @@
+.consultant-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  height: 100%;
+  padding: 28px 22px 40px;
+  background: var(--white);
+  border-left: 1px solid var(--line);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--blue-200) transparent;
+}
+
+.consultant-info .welcome-note {
+  margin: 0 0 22px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  text-transform: capitalize;
+}
+
+.consultant-info .picture {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--blue-100);
+  border: 3px solid var(--blue-200);
+}
+
+.consultant-info .name {
+  margin: 16px 0 18px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-align: center;
+}
+
+/* "Projects: 30" rows */
+.consultant-info .projects-number {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 0 8px;
+  padding: 10px 14px;
+  background: var(--blue-100);
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+.consultant-info .projects-number label {
+  color: var(--ink-soft);
+}
+
+.consultant-info .nuber {
+  margin: 0;
+  font-weight: 600;
+  color: var(--blue-600);
+}
+
+.consultant-info .edit-button {
+  display: block;
+  width: 100%;
+  margin: 12px 0 26px;
+  padding: 10px 14px;
+  border: 1px solid var(--blue-400);
+  border-radius: 10px;
+  color: var(--blue-600);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.consultant-info .edit-button:hover {
+  background: var(--blue-600);
+  border-color: var(--blue-600);
+  color: var(--white);
+}
+
+/* Compact done-projects list inside the panel */
+.consultant-info .my-done-projects {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.consultant-info .my-done-projects::before {
+  content: "Done projects";
+  margin-bottom: 4px;
+  color: var(--ink-soft);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.consultant-info .project-holder {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--blue-50);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.consultant-info .project-title,
+.consultant-info .price {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.consultant-info .project-title {
+  min-width: 0;
+  font-weight: 500;
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.consultant-info .price {
+  color: var(--ink-soft);
+}
+
+/* Small screens: panel goes on top, full width, no inner scroll */
+@media (max-width: 800px) {
+  .consultant-info {
+    height: auto;
+    overflow: visible;
+    border-left: none;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .consultant-home > .consultant-info {
+    grid-column: auto;
+  }
+}

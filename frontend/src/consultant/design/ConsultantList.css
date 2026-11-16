@@ -1,0 +1,81 @@
+/*
+  Columns are decided by the available width, not by device type:
+  each card needs at least 250px, and the grid is capped at ~3 columns
+  by max-width. Wide screen -> 3, medium -> 2, narrow -> 1.
+*/
+.consultant-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 32px 20px 48px;
+}
+
+/* Card (scoped, because ".container" is a very generic class name) */
+.consultant-list .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 22px 22px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.consultant-list .container:hover {
+  border-color: var(--blue-400);
+  transform: translateY(-2px);
+}
+
+.consultant-list img {
+  width: 96px;
+  height: 96px;
+  margin-bottom: 18px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--blue-100);
+  border: 3px solid var(--blue-200);
+  color: var(--ink-soft); /* alt text colour if the image is missing */
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+/* "Name: barbod" and "Number: 1003" rows */
+.consultant-list .name,
+.consultant-list .project-number {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  margin: 0 0 8px;
+  padding: 10px 14px;
+  background: var(--blue-100);
+  border-radius: 10px;
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.consultant-list .project-number {
+  margin-bottom: 0;
+  color: var(--blue-600);
+}
+
+.consultant-list label {
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: none;
+}
+
+@media (max-width: 480px) {
+  .consultant-list {
+    padding: 20px 14px 40px;
+  }
+}
