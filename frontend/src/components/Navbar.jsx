@@ -14,6 +14,12 @@ const Navbar = () => {
             <li className='navbar-button'>
                <Link className='Navbar-Link' to="/SignUp">Account</Link> 
             </li>
+            <li className='navbar-button'>
+               <Link className='Navbar-Link' to="/ClientDashboard">ClientDashboard</Link> 
+            </li>
+            <li className='navbar-button'>
+               <Link className='Navbar-Link' to="/Favorites">Favorites</Link> 
+            </li>
         </ul>
     )
 }

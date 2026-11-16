@@ -11,63 +11,58 @@ const Addition = () => {
     const [propertyType, setPropertyType] = useState('office');
     const [ClientType, setClientType] = useState('buyer');
 
-    const RoutingButton = ()=> {
+    const RoutingButton = () => {
         //office
         if(propertyType == 'office' && ClientType == 'buyer'){
-            console.log(propertyType," ",ClientType);
+            Navigate('/Home/Addition/OfficeBuy');
         }
         if(propertyType == 'office' && ClientType == 'seller'){
-            console.log(propertyType," ",ClientType);
+            Navigate('/Home/Addition/OfficeSell');
         }
         if(propertyType == 'office' && ClientType == 'tenant'){
-            console.log(propertyType," ",ClientType);
+            Navigate('/Home/Addition/OfficeTenant');
         }
         if(propertyType == 'office' && ClientType == 'landlord'){
-            console.log(propertyType," ",ClientType);
+            Navigate('/Home/Addition/OfficeLandlord');
         }
         //apartment
         if(propertyType == 'apartment' && ClientType == 'buyer'){
-            console.log(propertyType," ",ClientType);
             Navigate('/Home/Addition/ApartmentBuy');
         }
         if(propertyType == 'apartment' && ClientType == 'seller'){
-            console.log(propertyType," ",ClientType);
+            Navigate('/Home/Addition/ApartmentSell');
         }
         if(propertyType == 'apartment' && ClientType == 'tenant'){
-            console.log(propertyType," ",ClientType);
+            Navigate('/Home/Addition/ApartmentTenant');
         }
         if(propertyType == 'apartment' && ClientType == 'landlord'){
-            console.log(propertyType," ",ClientType);
+            Navigate('/Home/Addition/Apartmentlandlord');
         }
         //commercial
         if(propertyType == 'commercial' && ClientType == 'buyer'){
-            console.log(propertyType," ",ClientType);
+            Navigate('/Home/Addition/CommercialBuy');
         }
         if(propertyType == 'commercial' && ClientType == 'seller'){
-            console.log(propertyType," ",ClientType);
+            Navigate('/Home/Addition/CommercialSell');
         }
         if(propertyType == 'commercial' && ClientType == 'tenant'){
-            console.log(propertyType," ",ClientType);
+            Navigate('/Home/Addition/CommercialTenant');
         }
-        if(propertyType == 'commercial' && ClientType == ''){
-            console.log(propertyType," ",ClientType);
+        if(propertyType == 'commercial' && ClientType == 'landlord'){
+            Navigate('/Home/Addition/CommercialLandlord');
         }
         // کلنگی
         if(propertyType == 'کلنگی' && ClientType == 'buyer'){
-            console.log(propertyType," ",ClientType);
+            Navigate('/Home/Addition/DemolitionBuy');
         }
         if(propertyType == 'کلنگی' && ClientType == 'seller'){
-            console.log(propertyType," ",ClientType);
+            Navigate('/Home/Addition/DemolitionSell');
         }
         if(propertyType == 'کلنگی' && ClientType == 'tenant'){
             alert("this isn't acceptable");
         }
         if(propertyType == 'کلنگی' && ClientType == 'landlord'){
             alert("this isn't acceptable");
-        }
-        // checkup
-        if(propertyType == '' || ClientType == ''){
-            alert('Feilds cannot be empty');
         }
     }
 
