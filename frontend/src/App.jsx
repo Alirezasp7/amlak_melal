@@ -4,7 +4,7 @@ import Consultant from './userPanels/Consultant';
 
 function App() {
 
-  const userType = 'client';
+  const userType = 'consultant';
 
   if(userType == 'client') {
     return <Client/>

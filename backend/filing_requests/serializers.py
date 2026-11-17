@@ -5,7 +5,7 @@ from .utils import validate_range
 
 class BuyApartmentSerializer(serializers.ModelSerializer):
     class Meta:
-        Model = BuyApartmentRequest
+        model = BuyApartmentRequest
         fields = [
             "district",
             "min_price", "max_price",
@@ -16,16 +16,16 @@ class BuyApartmentSerializer(serializers.ModelSerializer):
             "description"
         ]
 
-        def validate(self, data):
-            errors = {}
+    def validate(self, data):
+        errors = {}
 
-            validate_range(data, errors, "min_price", "max_price", "قیمت")
-            validate_range(data, errors, "min_area", "max_area", "متراژ")
+        validate_range(data, errors, "min_price", "max_price", "قیمت")
+        validate_range(data, errors, "min_area", "max_area", "متراژ")
 
-            if errors:
-                raise serializers.ValidationError(errors)
+        if errors:
+            raise serializers.ValidationError(errors)
 
-            return data
+        return data
 
 
 class SellApartmentSerializer(serializers.ModelSerializer):
@@ -70,17 +70,17 @@ class RentApartmentSerializer(serializers.ModelSerializer):
             "description" 
         ]
 
-        def validate(self, data):
-            errors = {}
+    def validate(self, data):
+        errors = {}
 
-            validate_range(data, errors, "min_monthly_rent", "max_monthly_rent", "اجاره ماهانه")
-            validate_range(data, errors, "min_deposit", "max_deposit", "رهن")
-            validate_range(data, errors, "min_area", "max_area", "متراژ")
+        validate_range(data, errors, "min_monthly_rent", "max_monthly_rent", "اجاره ماهانه")
+        validate_range(data, errors, "min_deposit", "max_deposit", "رهن")
+        validate_range(data, errors, "min_area", "max_area", "متراژ")
 
-            if errors:
-                raise serializers.ValidationError(errors)
+        if errors:
+            raise serializers.ValidationError(errors)
 
-            return data
+        return data
 
 
 class LeaseApartmentSerializer(serializers.ModelSerializer):
@@ -106,16 +106,16 @@ class LeaseApartmentSerializer(serializers.ModelSerializer):
             "description"
         ]
 
-        def validate(self, data):
-            errors = {}
+    def validate(self, data):
+        errors = {}
 
-            validate_range(data, errors, "min_monthly_rent", "max_monthly_rent", "اجاره ماهانه")
-            validate_range(data, errors, "min_deposit", "max_deposit", "رهن")
+        validate_range(data, errors, "min_monthly_rent", "max_monthly_rent", "اجاره ماهانه")
+        validate_range(data, errors, "min_deposit", "max_deposit", "رهن")
 
-            if errors:
-                raise serializers.ValidationError(errors)
+        if errors:
+            raise serializers.ValidationError(errors)
 
-            return data
+        return data
 
 
 class BuyOfficeSerializer(serializers.ModelSerializer):
@@ -132,16 +132,16 @@ class BuyOfficeSerializer(serializers.ModelSerializer):
             "description"
         ]
 
-        def validate(self, data):
-            errors = {}
+    def validate(self, data):
+        errors = {}
 
-            validate_range(data, errors, "min_price", "max_price", "قیمت")
-            validate_range(data, errors, "min_area", "max_area", "متراژ")
+        validate_range(data, errors, "min_price", "max_price", "قیمت")
+        validate_range(data, errors, "min_area", "max_area", "متراژ")
 
-            if errors:
-                raise serializers.ValidationError(errors)
+        if errors:
+            raise serializers.ValidationError(errors)
 
-            return data
+        return data
 
 
 class SellOfficeSerializer(serializers.ModelSerializer):
@@ -186,17 +186,17 @@ class RentOfficeSerializer(serializers.ModelSerializer):
             "description"
         ]
 
-        def validate(self, data):
-            errors = {}
+    def validate(self, data):
+        errors = {}
 
-            validate_range(data, errors, "min_monthly_rent", "max_monthly_rent", "اجاره ماهانه")
-            validate_range(data, errors, "min_deposit", "max_deposit", "رهن")
-            validate_range(data, errors, "min_area", "max_area", "متراژ")
+        validate_range(data, errors, "min_monthly_rent", "max_monthly_rent", "اجاره ماهانه")
+        validate_range(data, errors, "min_deposit", "max_deposit", "رهن")
+        validate_range(data, errors, "min_area", "max_area", "متراژ")
 
-            if errors:
-                raise serializers.ValidationError(errors)
+        if errors:
+            raise serializers.ValidationError(errors)
 
-            return data
+        return data
 
 
 class LeaseOfficeSerializer(serializers.ModelSerializer):
@@ -223,16 +223,16 @@ class LeaseOfficeSerializer(serializers.ModelSerializer):
             "description"
         ]
 
-        def validate(self, data):
-            errors = {}
+    def validate(self, data):
+        errors = {}
 
-            validate_range(data, errors, "min_monthly_rent", "max_monthly_rent", "اجاره ماهانه")
-            validate_range(data, errors, "min_deposit", "max_deposit", "رهن")
+        validate_range(data, errors, "min_monthly_rent", "max_monthly_rent", "اجاره ماهانه")
+        validate_range(data, errors, "min_deposit", "max_deposit", "رهن")
 
-            if errors:
-                raise serializers.ValidationError(errors)
+        if errors:
+            raise serializers.ValidationError(errors)
 
-            return data
+        return data
 
 
 class BuyCommercialSerializer(serializers.ModelSerializer):
@@ -249,16 +249,16 @@ class BuyCommercialSerializer(serializers.ModelSerializer):
             "description"
         ]
 
-        def validate(self, data):
-            errors = {}
+    def validate(self, data):
+        errors = {}
 
-            validate_range(data, errors, "min_price", "max_price", "قیمت")
-            validate_range(data, errors, "min_area", "max_area", "متراژ")
+        validate_range(data, errors, "min_price", "max_price", "قیمت")
+        validate_range(data, errors, "min_area", "max_area", "متراژ")
 
-            if errors:
-                raise serializers.ValidationError(errors)
+        if errors:
+            raise serializers.ValidationError(errors)
 
-            return data
+        return data
 
 
 class SellCommercialSerializer(serializers.ModelSerializer):
@@ -286,20 +286,33 @@ class SellCommercialSerializer(serializers.ModelSerializer):
 
 
 class RentCommercialSerializer(serializers.ModelSerializer):
-    model = RentCommercialRequest
-    fields = [
-            "district",
-            "min_area",
-            "max_area",
-            "rooms",
-            "year_built",
-            "min_deposit",
-            "max_deposit",
-            "min_monthly_rent",
-            "max_monthly_rent",
-            "has_elevator", "has_parking", "has_storage",
-            "description"
-    ]
+    class Meta:
+        model = RentCommercialRequest
+        fields = [
+                "district",
+                "min_area",
+                "max_area",
+                "rooms",
+                "year_built",
+                "min_deposit",
+                "max_deposit",
+                "min_monthly_rent",
+                "max_monthly_rent",
+                "has_elevator", "has_parking", "has_storage",
+                "description"
+        ]
+
+    def validate(self, data):
+        errors = {}
+
+        validate_range(data, errors, "min_monthly_rent", "max_monthly_rent", "اجاره ماهانه")
+        validate_range(data, errors, "min_deposit", "max_deposit", "رهن")
+        validate_range(data, errors, "min_area", "max_area", "متراژ")
+
+        if errors:
+            raise serializers.ValidationError(errors)
+
+        return data
 
 
 class LeaseCommercialSerializer(serializers.ModelSerializer):
@@ -325,3 +338,14 @@ class LeaseCommercialSerializer(serializers.ModelSerializer):
             "has_elevator", "has_parking", "has_storage",
             "description"
         ]
+
+    def validate(self, data):
+        errors = {}
+    
+        validate_range(data, errors, "min_monthly_rent", "max_monthly_rent", "اجاره ماهانه")
+        validate_range(data, errors, "min_deposit", "max_deposit", "رهن")
+        
+        if errors:
+            raise serializers.ValidationError(errors)
+
+        return data
