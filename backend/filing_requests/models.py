@@ -306,6 +306,8 @@ class LeaseCommercialRequest(BaseRequest):
     min_monthly_rent = models.BigIntegerField(null=True, blank=True)
     max_monthly_rent = models.BigIntegerField(null=True, blank=True)
 
+    deed_status = models.SmallIntegerField(choices=DEED_STATUS_CHOICES, default=1)
+
     has_elevator = models.BooleanField(default=False)
     has_parking = models.BooleanField(default=False)
     has_storage = models.BooleanField(default=False)

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import BuyApartmentCreateView, SellApartmentCreateView, RentApartmentCreateView, LeaseApartmentCreateView, BuyOfficeCreateView, SellOfficeCreateView, RentOfficeCreateView, LeaseOfficeCreateView, select_request_type, request_success
+from .views import BuyApartmentCreateView, SellApartmentCreateView, RentApartmentCreateView, LeaseApartmentCreateView, BuyOfficeCreateView, SellOfficeCreateView, RentOfficeCreateView, LeaseOfficeCreateView, BuyCommercialCreateView, SellCommercialCreateView, RentCommercialCreateView, LeaseCommercialCreateView, select_request_type, request_success
 from . import views
 
 app_name = "filing_requests"
@@ -17,6 +17,11 @@ urlpatterns = [
     path("sell-office/", SellOfficeCreateView.as_view(), name="sell_office"),
     path("rent-office/", RentOfficeCreateView.as_view(), name="rent_office"),
     path("lease-office/", LeaseOfficeCreateView.as_view(), name="lease_office"),
+    #commercial urls
+    path("buy-commercial/", BuyCommercialCreateView.as_view(), name="buy_commercial"),
+    path("sell-commercial/", SellCommercialCreateView.as_view(), name="sell_commercial"),
+    path("rent-commercial/", RentCommercialCreateView.as_view(), name="rent_commercial"),
+    path("lease-commercial/", LeaseCommercialCreateView.as_view(), name="lease_commercial"),
 
     #remove after the pages are built in frontend
     path("temp/buy-apartment/", views.buy_apartment_request, name="buy_apartment"),
