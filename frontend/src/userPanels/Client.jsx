@@ -2,7 +2,7 @@ import './design/Client.css';
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import Home from '../client/Home';
 import Navbar from '../components/Navbar';
-import About from '../Client/About';
+import About from '../client/About';
 import Details from '../client/Details';
 import Addition from '../client/Addition';
 import SignUp from '../auth/SignUp';
