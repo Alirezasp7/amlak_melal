@@ -73,6 +73,8 @@ class BuyApartmentRequest(BaseRequest):
     has_storage = models.BooleanField(default=False)
     has_balcony = models.BooleanField(default=False)
 
+    description = models.CharField(max_length=500, blank=True)
+
 
 class SellApartmentRequest(BaseRequest):
     picture_1 = models.ImageField(upload_to="media/apartment/sell_apartment/", blank=True)
@@ -111,6 +113,8 @@ class RentApartmentRequest(BaseRequest):
     has_parking = models.BooleanField(default=False)
     has_storage = models.BooleanField(default=False)
     has_balcony = models.BooleanField(default=False)
+
+    description = models.CharField(max_length=500, blank=True)
 
 
 class LeaseApartmentRequest(BaseRequest):
@@ -155,6 +159,8 @@ class BuyOfficeRequest(BaseRequest):
     
     deed_status = models.SmallIntegerField(choices=DEED_STATUS_CHOICES, default=1)
 
+    description = models.CharField(max_length=500, blank=True)
+
 
 class SellOfficeRequest(BaseRequest):
     picture_1 = models.ImageField(upload_to="media/apartment/sell_office/", blank=True)
@@ -193,6 +199,8 @@ class RentOfficeRequest(BaseRequest):
 
     deed_status = models.SmallIntegerField(choices=DEED_STATUS_CHOICES, default=1)
 
+    description = models.CharField(max_length=500, blank=True)
+
 
 class LeaseOfficeRequest(BaseRequest):
     picture_1 = models.ImageField(upload_to="media/apartment/lease_office", blank=True)
@@ -224,3 +232,82 @@ class LeaseOfficeRequest(BaseRequest):
 
     description = models.CharField(max_length=500, blank=True)
 
+
+class BuyCommercialRequest(BaseRequest):
+    rooms = models.PositiveSmallIntegerField(choices=BEDROOM_CHOICES, default=1)
+    year_built = models.SmallIntegerField(choices=YEAR_BUILT_CHOICES, blank=True, default=1)
+
+    deed_status = models.SmallIntegerField(choices=DEED_STATUS_CHOICES, default=1)
+
+    has_elevator = models.BooleanField(default=False)
+    has_parking = models.BooleanField(default=False)
+    has_storage = models.BooleanField(default=False)
+
+    description = models.CharField(max_length=500, blank=True)
+
+
+class SellCommercialRequest(BaseRequest):
+    picture_1 = models.ImageField(upload_to="media/apartment/sell_commercial/", blank=True)
+    picture_2 = models.ImageField(upload_to="media/apartment/sell_commercial/", blank=True)
+    picture_3 = models.ImageField(upload_to="media/apartment/sell_commercial/", blank=True)
+    picture_4 = models.ImageField(upload_to="media/apartment/sell_commercial/", blank=True)
+    picture_5 = models.ImageField(upload_to="media/apartment/sell_commercial/", blank=True)
+    address = models.CharField(max_length=150)
+    rooms = models.PositiveSmallIntegerField(choices=BEDROOM_CHOICES, default=1)
+    units_per_floor = models.PositiveSmallIntegerField(choices=UNITS_PER_FLOOR_CHOICES, default=1)
+    floor = models.SmallIntegerField(choices=FLOOR_CHOICES, default=1)
+    total_floors = models.PositiveSmallIntegerField(choices=TOTAL_FLOORS_CHOICES, default=1)
+    year_built = models.SmallIntegerField(choices=YEAR_BUILT_CHOICES, default=1)
+
+    has_elevator = models.BooleanField(default=False)
+    has_parking = models.BooleanField(default=False)
+    has_storage = models.BooleanField(default=False)
+
+    deed_status = models.SmallIntegerField(choices=DEED_STATUS_CHOICES, default=1)
+
+    description = models.CharField(max_length=500, blank=True)
+
+
+class RentCommercialRequest(BaseRequest):
+    rooms = models.PositiveSmallIntegerField(choices=BEDROOM_CHOICES, default=1)
+    year_built = models.SmallIntegerField(choices=YEAR_BUILT_CHOICES, blank=True, default=1)
+
+    min_deposit = models.BigIntegerField(null=True, blank=True)
+    max_deposit = models.BigIntegerField(null=True, blank=True)
+    min_monthly_rent = models.BigIntegerField(null=True, blank=True)
+    max_monthly_rent = models.BigIntegerField(null=True, blank=True)
+
+    has_elevator = models.BooleanField(default=False)
+    has_parking = models.BooleanField(default=False)
+    has_storage = models.BooleanField(default=False)
+    
+    description = models.CharField(max_length=500, blank=True)
+
+
+class LeaseCommercialRequest(BaseRequest):
+    picture_1 = models.ImageField(upload_to="media/apartment/lease_commercial", blank=True)
+    picture_2 = models.ImageField(upload_to="media/apartment/lease_commercial", blank=True)
+    picture_3 = models.ImageField(upload_to="media/apartment/lease_commercial", blank=True)
+    picture_4 = models.ImageField(upload_to="media/apartment/lease_commercial", blank=True)
+    picture_5 = models.ImageField(upload_to="media/apartment/lease_commercial", blank=True)
+
+    address = models.CharField(max_length=150)
+    rooms = models.PositiveSmallIntegerField(choices=BEDROOM_CHOICES, default=1)
+    floor = models.SmallIntegerField(choices=FLOOR_CHOICES, default=1)
+    total_floors = models.PositiveSmallIntegerField(choices=TOTAL_FLOORS_CHOICES, default=1)
+    year_built = models.SmallIntegerField(choices=YEAR_BUILT_CHOICES, default=1)
+
+    exact_deposit = models.BigIntegerField(null=True, blank=True)
+    exact_monthly_rent = models.BigIntegerField(null=True, blank=True)
+    is_convertible = models.BooleanField(default=False)
+
+    min_deposit = models.BigIntegerField(null=True, blank=True)
+    max_deposit = models.BigIntegerField(null=True, blank=True)
+    min_monthly_rent = models.BigIntegerField(null=True, blank=True)
+    max_monthly_rent = models.BigIntegerField(null=True, blank=True)
+
+    has_elevator = models.BooleanField(default=False)
+    has_parking = models.BooleanField(default=False)
+    has_storage = models.BooleanField(default=False)
+
+    description = models.CharField(max_length=500, blank=True)

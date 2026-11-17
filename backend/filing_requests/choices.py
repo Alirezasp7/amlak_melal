@@ -42,6 +42,7 @@ def property_type_choices_for(user_type):
     return result
 
 BEDROOM_CHOICES = [
+    (0, "بدون اتاق"),
     (1, "۱"),
     (2, "۲"),
     (3, "۳"),
