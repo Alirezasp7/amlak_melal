@@ -12,7 +12,8 @@ class BuyApartmentSerializer(serializers.ModelSerializer):
             "min_area", "max_area",
             "bedrooms",
             "year_built",
-            "has_elevator", "has_storage", "has_balcony", "has_parking"
+            "has_elevator", "has_storage", "has_balcony", "has_parking",
+            "description"
         ]
 
         def validate(self, data):
@@ -65,7 +66,8 @@ class RentApartmentSerializer(serializers.ModelSerializer):
             "max_deposit",
             "min_monthly_rent",
             "max_monthly_rent",
-            "has_elevator", "has_parking", "has_storage", "has_balcony"
+            "has_elevator", "has_parking", "has_storage", "has_balcony",
+            "description" 
         ]
 
         def validate(self, data):
@@ -99,7 +101,8 @@ class LeaseApartmentSerializer(serializers.ModelSerializer):
             "exact_deposit", "exact_monthly_rent",
             "min_deposit", "max_deposit", "min_monthly_rent", "max_monthly_rent",
             "is_convertible",
-            "has_elevator", "has_parking", "has_storage", "has_balcony"
+            "has_elevator", "has_parking", "has_storage", "has_balcony",
+            "description"
         ]
 
         def validate(self, data):
@@ -124,7 +127,8 @@ class BuyOfficeSerializer(serializers.ModelSerializer):
             "rooms",
             "year_built",
             "deed_status",
-            "has_elevator", "has_storage", "has_parking"
+            "has_elevator", "has_storage", "has_parking",
+            "description"
         ]
 
         def validate(self, data):
@@ -176,8 +180,9 @@ class RentOfficeSerializer(serializers.ModelSerializer):
             "max_deposit",
             "min_monthly_rent",
             "max_monthly_rent",
+            "deed_status",
             "has_elevator", "has_parking", "has_storage",
-            "deed_status"
+            "description"
         ]
 
         def validate(self, data):
