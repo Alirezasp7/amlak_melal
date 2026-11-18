@@ -102,7 +102,7 @@ const CommercialSell = () => {
         } catch (err) {
             const errorMessage = err instanceof Error ? err.message : "An unknown error occurred";
             setError(errorMessage);
-            setMessage("Failed to add.");
+            setMessage(`Error: ${error}`);
         } finally {
             setIsSending(false);
         }

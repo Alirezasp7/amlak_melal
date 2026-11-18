@@ -90,3 +90,28 @@ Format: `type: short description`
 *   `fix: handle empty description on property page`
 
 
+## completed frontend api fetching 
+
+   # home page
+   public-filings
+
+   # detail page
+   public-filings
+
+   # property listing
+   apartment buy 
+   apartment sell
+   apartment rent
+   apartment lease
+
+   office buy
+   office sell
+   office rent
+   office lease
+
+   commercial buy
+   commercal sell
+   commercial rent
+   commercial lease
+
+

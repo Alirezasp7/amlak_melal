@@ -11,6 +11,7 @@ const ApiListResposnse = () => {
     const [error, setError] = useState(null)
     const apiIsEmpty = list.length === 0;
 
+
     const fetchRealStateList = async () => {
             try {
                 const response = await fetch('http://localhost:8000/api/v1/public-filings/', {method:"GET"});
@@ -65,12 +66,38 @@ const ApiListResposnse = () => {
 
 const Home = () => {
 
-    const Name = "Barbod"
+    const [nameErr, setNameErr] = useState(null);
+    // const [nameLoading, setNameLoading]= useState(true);
+    const [name, setName] = useState('');
+
+    const fetchUserName = async () => {
+            try {
+                const response = await fetch('http://localhost:8000/api/user-name', {method:"GET"});
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch list');
+                }
+
+                const userName = await response.json();
+                setName(userName.name);
+                
+            } catch (err) {
+                setNameErr(err.message);
+                console.log(nameErr);
+
+            } finally {} 
+
+    };
+
+    useEffect(() => {
+        fetchUserName();
+    },[])
+
     const Navigate = useNavigate();
 
     return(
         <div className="homePage">
-            <h1 className="name-header">Hello {Name}</h1>
+            <h1 className="name-header">Hello {name}</h1>
             <button className='addition-button' onClick={() => (Navigate("/Home/Addition"))}>+</button>
             <ApiListResposnse />
         </div>
