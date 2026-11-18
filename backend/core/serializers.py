@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from consultants.models import Filing
+from .models import Favorite
 
 class PublicFilingSerializer(serializers.ModelSerializer):
     district_name = serializers.CharField(source="district.name", read_only=True)
@@ -19,10 +20,12 @@ class PublicFilingSerializer(serializers.ModelSerializer):
     occupancy_status_display = serializers.CharField(source="get_occupancy_status_display", read_only=True)
     deed_status_display = serializers.CharField(source="get_deed_status_display", read_only=True)
 
+    is_favorited = serializers.SerializerMethodField()
+
     class Meta:
         model = Filing
         fields = [
-            'id', 'title', 'description', 
+            'id', 'title', 'description', 'is_favorited', 
             
             # Types
             'property_type', 'property_type_display',
@@ -60,3 +63,12 @@ class PublicFilingSerializer(serializers.ModelSerializer):
             # Meta
             'created_at', 'published_at', 'is_published'
         ]
+
+
+    def get_is_favorited(self, obj):
+        request = self.context.get("request")
+
+        if not request or not request.user.is_authenticated:
+            return False
+
+        return Favorite.objects.filter(user=request.user, filing=obj).exists()
