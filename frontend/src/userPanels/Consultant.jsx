@@ -4,7 +4,8 @@ import ConsultantHome from '../consultant/ConsultantHome';
 import SignUp from '../auth/SignUp';
 import ConsultantNavbar from '../components/ConsultantNavbar';
 import ConsultantList from '../consultant/ConsultantList';
-import EditProfile from '../consultant/EditProfile'
+import EditProfile from '../consultant/EditProfile';
+import ConsultantDashboard from '../consultant/ConsultantDashboard';
 
 function Consultant() {
   return (
@@ -16,6 +17,7 @@ function Consultant() {
           <Route path='/ConsultantList' element={<ConsultantList/>}/>
           <Route path='/SignUp' element={<SignUp/>}/>
           <Route path='/ConsultantInfo/EditProfile' element={<EditProfile/>}/>
+          <Route path='/ConsultantDashboard' element={<ConsultantDashboard/>}/>
         </Routes>
       </div>
     </Router>

@@ -14,9 +14,9 @@ const Navbar = () => {
             <li className='navbar-button'>
                <Link className='Navbar-Link' to="/SignUp">Account</Link> 
             </li>
-            {/* <li className='navbar-button'>
+            <li className='navbar-button'>
                <Link className='Navbar-Link' to="/ConsultantDashboard">Dashboard</Link> 
-            </li> */}
+            </li>
         </ul>
     )
 }

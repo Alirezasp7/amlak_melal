@@ -11,7 +11,7 @@ const ClientDashboard = () => {
     const fetchClientList = async () => {
         
         try {
-            const response = await fetch('http://localhost:8000/api/', {method:"GET"});
+            const response = await fetch('http://localhost:8000/api/test', {method:"GET"});
 
             if (!response.ok) {
                 throw new Error('Failed to fetch list');
