@@ -5,12 +5,11 @@ from consultants.models import Filing
 
 # Create your models here.
 
-
-class Favorites(models.Model):
+class Favorite(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name="favortes"
+        related_name="favorte"
     )
 
     filing = models.ForeignKey(Filing, on_delete=models.CASCADE)
