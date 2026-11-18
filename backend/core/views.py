@@ -25,3 +25,6 @@ class PublicFilingViewSet(viewsets.ModelViewSet):
     queryset = Filing.objects.filter(is_published=True).select_related("district", "consultant")
     serializer_class = PublicFilingSerializer
     permission_classes = [AllowAny]  
+
+
+
